@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">UI Basic</string>
+    <string name="app_version">1.0.1beta</string>
+    <string name="button_msg">登入</string>
+    <string name="username_msg">請輸入帳號</string>
+    <string name="password_hint">請輸入密碼\n\n</string>
+    <string name="password_msg">請輸入密碼</string>
+    <string name="icon_msg">圖示</string>
+    <string name="button_msg1">註冊</string>
+</resources>
