@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainBlue"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/ConfirmButton"
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:background="@color/itemBlue"
+        android:text="確認註冊"
+        android:gravity="center"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="105dp"
+        tools:layout_editor_absoluteY="400dp" />
+
+    <Button
+        android:id="@+id/CancelButton"
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:text="取消"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:background="@color/itemBlue"
+        tools:layout_editor_absoluteX="105dp"
+        tools:layout_editor_absoluteY="460dp" />
+
+    <EditText
+        android:id="@+id/NameInput"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="姓名"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="80dp"
+        tools:layout_editor_absoluteY="200dp" />
+
+    <EditText
+        android:id="@+id/AccountInput"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="帳號"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="80dp"
+        tools:layout_editor_absoluteY="250dp" />
+
+    <EditText
+        android:id="@+id/PasswordInput"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="密碼"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="80dp"
+        tools:layout_editor_absoluteY="300dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
