@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
@@ -11,39 +11,53 @@
     android:orientation="vertical">
 
     <include
-        android:id="@+id/include"
-        layout="@layout/toolbar"
-        app:layout_constraintTop_toTopOf="parent" />
+        layout="@layout/toolbar"/>
 
     <ImageButton
         android:id="@+id/imageButton2"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="275dp"
+        android:layout_marginTop="590dp"
+        android:layout_marginEnd="75dp"
+        android:layout_marginBottom="80dp"
         android:background="@color/itemBlue"
-        app:layout_constraintTop_toTopOf="@+id/imageButton"
-        app:srcCompat="@drawable/ic_edit"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="75dp" />
+        app:srcCompat="@drawable/ic_share" />
 
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="175dp"
+        android:layout_marginTop="590dp"
+        android:layout_marginEnd="175dp"
+        android:layout_marginBottom="80dp"
         android:background="@color/itemBlue"
-        app:srcCompat="@drawable/ic_feed"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="175dp"
-        tools:layout_editor_absoluteY="600dp" />
+        app:srcCompat="@drawable/ic_feed" />
 
     <ImageButton
         android:id="@+id/imageButton3"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="590dp"
+        android:layout_marginEnd="275dp"
+        android:layout_marginBottom="80dp"
         android:background="@color/itemBlue"
         app:layout_constraintTop_toTopOf="@+id/imageButton"
-        app:srcCompat="@drawable/ic_share"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="275dp" />
+        app:srcCompat="@drawable/ic_edit" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
