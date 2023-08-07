@@ -117,4 +117,15 @@
         app:srcCompat="@drawable/blue1fish" />
 
 
+
+    <!-- 0806 -->
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/fish_gif"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:src="@drawable/fish_gif"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 </RelativeLayout>
