@@ -62,18 +62,17 @@
 
 
     <!-- 0806 -->
-
-    <!-- 0807 -->
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/fish_gif"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/made_fish"
+        android:src="@drawable/fish_1"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
+    <!-- 0807 -->
     <Button
         android:id="@+id/addFish"
         style="@style/TextAppearance.AppCompat.Widget.Button"
@@ -85,6 +84,28 @@
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <!-- 0813 -->
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/seaweed_gif"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/seaweed_2"
+        android:layout_marginStart="210dp"
+        android:layout_marginTop="400dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="150dp" />
+
+    <!-- 0813 -->
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/barrel_gif"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/barrel_2"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="400dp"
+        android:layout_marginEnd="2100dp"
+        android:layout_marginBottom="150dp" />
 
 
 </RelativeLayout>

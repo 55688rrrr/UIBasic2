@@ -28,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
     //0807
     /* Button addFish = findViewById(R.id.addFish); */
 
+    //0813
+    private GifImageView seaweed_gif;
+    private GifImageView barrel_gif;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +40,19 @@ public class MainActivity extends AppCompatActivity {
         //0806
         GifImageView fish_gif = findViewById(R.id.fish_gif);
         try{
-            GifDrawable gifDrawable = new GifDrawable(getResources(), R.drawable.made_fish);
-            fish_gif.setImageDrawable(gifDrawable);
+            GifDrawable gifFish = new GifDrawable(getResources(), R.drawable.fish_1);
+            fish_gif.setImageDrawable(gifFish);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //0813
+        GifImageView seaweed_gif = findViewById(R.id.seaweed_gif);
+        GifImageView barrel_gif = findViewById(R.id.barrel_gif);
+        try{
+            GifDrawable gifSeaweed = new GifDrawable(getResources(), R.drawable.seaweed_2);
+            GifDrawable gifBarrel = new GifDrawable(getResources(), R.drawable.barrel_2);
+            seaweed_gif.setImageDrawable(gifSeaweed);
+            barrel_gif.setImageDrawable(gifBarrel);
         }catch (Exception e){
             e.printStackTrace();
         }
