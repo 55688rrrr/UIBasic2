@@ -20,13 +20,13 @@ public class MainActivity extends AppCompatActivity {
     //0806
     private GifImageView fish_gif;
     //0807
-    ArrayList<GifImageView> fishList = new ArrayList<GifImageView>();
+    /* ArrayList<GifImageView> fishList = new ArrayList<GifImageView>(); */
     //增加魚：fishList.add(fish0);
     //魚死掉之類的：fishList.remove(0);
     //不同類別，e.g. 運動、健康，可以設成fish_sport_0、fish_health_0之類的？
 
     //0807
-    Button addFish = findViewById(R.id.addFish);
+    /* Button addFish = findViewById(R.id.addFish); */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //0807
+        /*
         addFish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,6 +51,17 @@ public class MainActivity extends AppCompatActivity {
                 //fishList.add(fish0);
             }
         });
+        */
 
     }
 }
+
+
+
+/*
+--- 每週應完成的進度 ---
+0807:
+1. 魚可以左右游動
+2. 背景裝飾物的gif
+* gif檔會變亂碼？！
+*/
