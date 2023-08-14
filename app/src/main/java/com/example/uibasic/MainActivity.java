@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         //0806
         GifImageView fish_gif = findViewById(R.id.fish_gif);
         try{
-            GifDrawable gifFish = new GifDrawable(getResources(), R.drawable.fish_1);
+            GifDrawable gifFish = new GifDrawable(getResources(), R.drawable.fish_3);
             fish_gif.setImageDrawable(gifFish);
         }catch (Exception e){
             e.printStackTrace();
