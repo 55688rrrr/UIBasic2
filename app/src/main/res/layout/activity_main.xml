@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,11 +6,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/mainBlue"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
     <include
         layout="@layout/toolbar"/>
 
+    <!-- 0813 -->
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/barrel_gif"
+        android:layout_width="200dp"
+        android:layout_height="300dp"
+        android:src="@drawable/barrel_1"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="450dp"
+        android:layout_marginEnd="250dp"
+        android:layout_marginBottom="50dp" />
+
+    <!-- 0813 -->
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/seaweed_gif"
+        android:layout_width="300dp"
+        android:layout_height="450dp"
+        android:src="@drawable/seaweed_1"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="350dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="-80dp" />
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/seaweed_gif_2"
+        android:layout_width="300dp"
+        android:layout_height="450dp"
+        android:src="@drawable/seaweed_1"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="400dp"
+        android:layout_marginEnd="-30dp"
+        android:layout_marginBottom="-100dp" />
 
     <ImageButton
         android:id="@+id/imageButton3"
@@ -59,6 +88,31 @@
         android:layout_marginBottom="90dp"
         android:background="@color/itemBlue"
         app:srcCompat="@drawable/ic_share" />
+
+
+
+    <!-- 0806 -->
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/fish_gif"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="200dp"
+        android:src="@drawable/fish_3" />
+
+    <!-- 0807 -->
+    <Button
+        android:id="@+id/addFish"
+        style="@style/TextAppearance.AppCompat.Widget.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:padding="3dp"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 </RelativeLayout>
