@@ -40,12 +40,21 @@ public class MainActivity extends AppCompatActivity {
 
         //0806
         GifImageView fish_gif = findViewById(R.id.fish_gif);
+        //0821
+        GifImageView fish_gif_2 = findViewById(R.id.fish_gif_2);
+        GifImageView bw_fish = findViewById(R.id.bw_fish);
         try{
-            GifDrawable gifFish = new GifDrawable(getResources(), R.drawable.fish_3);
+            GifDrawable gifFish = new GifDrawable(getResources(), R.drawable.blue_fish);
             fish_gif.setImageDrawable(gifFish);
+            //0821
+            GifDrawable gifFish2 = new GifDrawable(getResources(), R.drawable.blue_fish);
+            fish_gif_2.setImageDrawable(gifFish2);
+            GifDrawable bwFish = new GifDrawable(getResources(), R.drawable.black_white_fish);
+            bw_fish.setImageDrawable(bwFish);
         }catch (Exception e){
             e.printStackTrace();
         }
+
         //0813
         GifImageView seaweed_gif = findViewById(R.id.seaweed_gif);
         GifImageView barrel_gif = findViewById(R.id.barrel_gif);
@@ -78,9 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 /*
---- 每週應完成的進度 ---
-0807:
-1. 魚可以左右游動
-2. 背景裝飾物的gif
-* gif檔會變亂碼？！
+--- 待辦 ---
+1. 讓黑白魚也游起來
+2. 從右游到左（原只有由左到右）
 */
