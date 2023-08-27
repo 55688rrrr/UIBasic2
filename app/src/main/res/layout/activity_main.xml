@@ -117,6 +117,15 @@
         android:layout_marginTop="400dp"
         android:layout_marginBottom="200dp"
         android:src="@drawable/black_white_fish" />
+    <!-- 0827 -->
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/bw_fish_2"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="380dp"
+        android:src="@drawable/black_white_fish" />
 
     <!-- 0807 -->
     <Button

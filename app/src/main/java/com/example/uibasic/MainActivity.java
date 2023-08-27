@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         //0821
         GifImageView fish_gif_2 = findViewById(R.id.fish_gif_2);
         GifImageView bw_fish = findViewById(R.id.bw_fish);
+        //0827
+        GifImageView bw_fish_2 = findViewById(R.id.bw_fish_2);
         try{
             GifDrawable gifFish = new GifDrawable(getResources(), R.drawable.blue_fish);
             fish_gif.setImageDrawable(gifFish);
@@ -51,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
             fish_gif_2.setImageDrawable(gifFish2);
             GifDrawable bwFish = new GifDrawable(getResources(), R.drawable.black_white_fish);
             bw_fish.setImageDrawable(bwFish);
+            //0827
+            GifDrawable bwFish2 = new GifDrawable(getResources(), R.drawable.black_white_fish);
+            bw_fish_2.setImageDrawable(bwFish2);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -91,4 +96,4 @@ public class MainActivity extends AppCompatActivity {
 1. 讓黑白魚也游起來
 2. 從右游到左（原只有由左到右）
 3. 串連各頁面？？🫠
-*/ //
+*/
