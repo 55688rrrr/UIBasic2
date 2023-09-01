@@ -8,16 +8,14 @@ import android.view.View;
 import android.widget.ImageButton;
 
 public class register_page extends AppCompatActivity {
-    private ImageButton confirm;
-    private ImageButton cancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_page);
 
-        confirm = findViewById(R.id.ConfirmButton);
-        cancel = findViewById(R.id.CancelButton);
+        ImageButton confirm = findViewById(R.id.ConfirmButton);
+        ImageButton cancel = findViewById(R.id.CancelButton);
 
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override

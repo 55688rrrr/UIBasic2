@@ -36,9 +36,6 @@ public class MainActivity extends AppCompatActivity {
     private GifImageView barrel_gif;
     private GifImageView seaweed_gif_2;
 
-    //0827
-    private ImageButton mdbt;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +76,8 @@ public class MainActivity extends AppCompatActivity {
         */
 
         //0827 按中間那顆可以切到登入畫面
-        mdbt = findViewById(R.id.imageButton);
+        //0827
+        ImageButton mdbt = findViewById(R.id.imageButton);
         mdbt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
