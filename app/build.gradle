@@ -35,6 +35,9 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
         //0806
         implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.23'
+
+    implementation files('libs\\mysql-connector-java-5.1.48-bin.jar')
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
