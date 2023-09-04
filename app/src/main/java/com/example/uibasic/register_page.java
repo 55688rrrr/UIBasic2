@@ -1,6 +1,7 @@
 package com.example.uibasic;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,8 +9,8 @@ import android.view.View;
 import android.widget.ImageButton;
 
 public class register_page extends AppCompatActivity {
-    private ImageButton confirm;
-    private ImageButton cancel;
+    private AppCompatButton confirm;
+    private AppCompatButton cancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
