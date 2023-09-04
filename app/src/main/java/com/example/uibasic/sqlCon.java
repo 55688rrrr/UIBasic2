@@ -15,25 +15,31 @@ public class sqlCon {
     String url = "jdbc:mysql://db4free.net:3306/fish_tank1";
     String db_user = "fishtank1";
     String db_password = "108306009";
+    private Connection con;
 
-    public void run() {
+    public Connection run() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Log.v("DB","加載驅動成功");
         }catch( ClassNotFoundException e) {
             Log.e("DB","加載驅動失敗");
-            return;
+            return null;
         }
 
         // 連接資料庫
         try {
-            Connection con = DriverManager.getConnection(url,db_user,db_password);
+            con = DriverManager.getConnection(url,db_user,db_password);
             Log.v("DB","遠端連接成功");
         }catch(SQLException e) {
             Log.e("DB","遠端連接失敗");
             Log.e("DB", e.toString());
         }
+        return con;
     }
+
+
+
+
 
 
 }
