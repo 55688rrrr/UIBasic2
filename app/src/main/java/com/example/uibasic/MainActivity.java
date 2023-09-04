@@ -2,6 +2,7 @@ package com.example.uibasic;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -13,6 +14,8 @@ import pl.droidsonroids.gif.GifDrawable;
 
 //0807
 import android.widget.Button;
+import android.widget.ImageButton;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
     private GifImageView seaweed_gif;
     private GifImageView barrel_gif;
     private GifImageView seaweed_gif_2;
+
+    //0827
+    private ImageButton mdbt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +77,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         */
+
+        //0827 按中間那顆可以切到登入畫面
+        mdbt = findViewById(R.id.imageButton);
+        mdbt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, login_page.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }
