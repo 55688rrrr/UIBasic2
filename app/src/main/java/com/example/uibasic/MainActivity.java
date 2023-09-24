@@ -76,12 +76,21 @@ public class MainActivity extends AppCompatActivity {
         */
 
         //0827 按中間那顆可以切到登入畫面
-        //0827
         ImageButton mdbt = findViewById(R.id.imageButton);
         mdbt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, login_page.class);
+                startActivity(intent);
+            }
+        });
+
+        //0924 左邊那顆切圖鑑
+        ImageButton rtbt = findViewById(R.id.imageButton2);
+        rtbt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MainActivity3.class);
                 startActivity(intent);
             }
         });
