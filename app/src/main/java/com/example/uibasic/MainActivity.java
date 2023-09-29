@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
     //0807
     /* Button addFish = findViewById(R.id.addFish); */
+    //0925 用主畫面左邊那個button試做成新增魚的按鈕
+    private ImageButton addFish = findViewById(R.id.imageButton3);
 
     //0813
     private GifImageView seaweed_gif;
@@ -81,16 +83,21 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        //0807
-        /*
-        addFish.setOnClickListener(new View.OnClickListener() {
+        //0807          //0925 用主畫面左邊那個button試做成新增魚的按鈕；重做0807的
+        /* addFish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //GifImageView fish0;
                 //fishList.add(fish0);
+                GifImageView blue_fish_0 = findViewById(R.id.fish_gif);
+                try{
+                    GifDrawable blueFish0 = new GifDrawable(getResources(), R.drawable.blue_fish);
+                    blue_fish_0.setImageDrawable(blueFish0);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             }
-        });
-        */
+        }); */
 
         //0827 按中間那顆可以切到登入畫面
         mdbt = findViewById(R.id.imageButton);
