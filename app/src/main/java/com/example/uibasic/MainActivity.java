@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     //增加魚：fishList.add(fish0);
     //魚死掉之類的：fishList.remove(0);
     //不同類別，e.g. 運動、健康，可以設成fish_sport_0、fish_health_0之類的？
+    //0930
+    ArrayList<GifImageView> blueFishList = new ArrayList<GifImageView>();
 
     //0807
     /* Button addFish = findViewById(R.id.addFish); */
@@ -90,13 +92,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //GifImageView fish0;
                 //fishList.add(fish0);
-                GifImageView blue_fish_0 = findViewById(R.id.fish_gif);
+                System.out.print(R.drawable.blue1fish);
+                GifImageView blue_fish_0 = findViewById(R.id.blue_fish_0);
                 try{
                     GifDrawable blueFish0 = new GifDrawable(getResources(), R.drawable.blue_fish);
                     blue_fish_0.setImageDrawable(blueFish0);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
+                //0930 （希望有懸浮視窗後可以直接從arraylist看到有幾隻魚？？）
+                blueFishList.add(blue_fish_0);
+                //❓能不能讓魚出現在隨機的位置？？？😟
             }
         });
 
@@ -120,4 +126,9 @@ public class MainActivity extends AppCompatActivity {
 1. 讓黑白魚也游起來 -> done
 2. 從右游到左（原只有由左到右）
 3. 串連各頁面？？🫠 -> done??
+---
+* 加🐟進去
+* 不要硬寫gif上去？
+* 🐟出現在隨機位置？
+* 懸浮視窗？？
 */

@@ -140,5 +140,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
+    <!-- 0930 -->
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/blue_fish_0"
+        android:src="@drawable/blue_fish"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:autoStart="true"
+        android:autoMirrored="true"
+        android:repeatCount="-1" />
+            <!-- repeat as long as it is displayed (once start() is called) -->
+
 
 </RelativeLayout>
