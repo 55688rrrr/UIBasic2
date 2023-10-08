@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //GifImageView fish0;
                 //fishList.add(fish0);
-                System.out.print(R.drawable.blue1fish);
+                //System.out.print(R.drawable.blue1fish);
                 GifImageView blue_fish_0 = findViewById(R.id.blue_fish_0);
                 try{
                     GifDrawable blueFish0 = new GifDrawable(getResources(), R.drawable.blue_fish);
@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 //0930 （希望有懸浮視窗後可以直接從arraylist看到有幾隻魚？？）
+                //可以用blueFishList.size()得知list的大小aka魚的數量
                 blueFishList.add(blue_fish_0);
                 //❓能不能讓魚出現在隨機的位置？？？😟
             }
