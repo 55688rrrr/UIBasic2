@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //0924 左邊那顆切圖鑑
+        //1008 右邊那顆切魚
         ImageButton rtbt = findViewById(R.id.imageButton2);
         rtbt.setOnClickListener(new View.OnClickListener() {
             @Override
