@@ -131,9 +131,7 @@ public class MainActivity extends AppCompatActivity {
 
 /*
 --- 待辦 ---
-1. 讓黑白魚也游起來 -> done
-2. 從右游到左（原只有由左到右）
-3. 串連各頁面？？🫠 -> done??
+從右游到左（原只有由左到右）
 ---
 * 加🐟進去
 * 不要硬寫gif上去？
