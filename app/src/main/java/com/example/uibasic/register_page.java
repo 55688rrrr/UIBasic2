@@ -16,6 +16,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -204,8 +205,10 @@ public class register_page extends AppCompatActivity{
             if (success) {
                 // 数据库操作成功
                 System.err.println("gogo");
+                Toast.makeText(register_page.this, "註冊成功", Toast.LENGTH_SHORT).show();
             } else {
                 // 数据库操作失败
+                Toast.makeText(register_page.this, "註冊失敗", Toast.LENGTH_SHORT).show();
             }
         }
     }
