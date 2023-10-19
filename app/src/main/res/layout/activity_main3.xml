@@ -16,21 +16,26 @@
         android:id="@+id/add_blueFish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:contentDescription="TODO"
+        app:srcCompat="@drawable/bf_pic"
+        android:onClick="onClick"/>
+        <!--
         android:layout_marginStart="100dp"
         android:layout_marginTop="300dp"
         android:layout_marginEnd="300dp"
         android:layout_marginBottom="300dp"
-        android:background="@color/white"
-        android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bf_pic" />
+        -->
+            <!-- android:onClick="onAddItem" ？？ -->
 
     <!-- 1009 -->
     <ImageButton
         android:id="@+id/add_bwFish"
+        android:visible="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="300dp"
@@ -44,5 +49,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/bw_pic" />
+            <!-- 1010 set visibility (第二行) -> 沒用？？☹️ -->
+
+    <!-- 1009 試試看？？ -->
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lvItems"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/btnAddItem" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

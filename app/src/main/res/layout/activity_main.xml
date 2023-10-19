@@ -148,8 +148,10 @@
         android:layout_height="200dp"
         android:autoStart="false"
         android:autoMirrored="true"
-        android:repeatCount="-1" />
-            <!-- repeat as long as it is displayed (once start() is called) -->
+        android:repeatCount="-1"
+        android:visible="false" />
+            <!-- repeatCount=-1: repeat as long as it is displayed (once start() is called) -->
+            <!-- 1009: set visibility -->
 
 
 </RelativeLayout>
