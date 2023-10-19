@@ -19,11 +19,11 @@ import android.widget.ImageButton;
 import java.util.ArrayList;
 
 //1018
-import android.view.animation.TranslateAnimation;
+//import android.view.animation.TranslateAnimation;
 //可是只能extends一個而已... implements要接interface...
 //1019 試著改變位置？
-import android.graphics.Canvas;
-import android.graphics.Bitmap;
+//import android.graphics.Canvas;
+//import android.graphics.Bitmap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
 
-            //1019 一開始先隱藏？
+            //1019 事先在xml寫好的檔案 一開始先隱藏
             GifImageView blue_fish_0 = findViewById(R.id.blue_fish_0);
             blue_fish_0.setVisibility(View.INVISIBLE);
 
