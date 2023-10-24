@@ -18,6 +18,8 @@ import android.widget.ImageButton;
 
 import java.util.ArrayList;
 
+// 1024 randy git test
+
 //1018
 //import android.view.animation.TranslateAnimation;
 //可是只能extends一個而已... implements要接interface...
