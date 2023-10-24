@@ -206,6 +206,12 @@ public class register_page extends AppCompatActivity{
                 // 数据库操作成功
                 System.err.println("gogo");
                 Toast.makeText(register_page.this, "註冊成功", Toast.LENGTH_SHORT).show();
+
+                // 创建Intent对象
+                Intent intent = new Intent(register_page.this, login_page.class);
+
+                // 启动登录页面的Activity
+                startActivity(intent);
             } else {
                 // 数据库操作失败
                 Toast.makeText(register_page.this, "註冊失敗", Toast.LENGTH_SHORT).show();
