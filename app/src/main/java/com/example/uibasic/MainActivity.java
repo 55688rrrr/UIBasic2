@@ -18,7 +18,7 @@ import android.widget.ImageButton;
 
 import java.util.ArrayList;
 
-// 1024 randy git test
+// 20:37 1024 randy git test
 
 //1018
 //import android.view.animation.TranslateAnimation;
