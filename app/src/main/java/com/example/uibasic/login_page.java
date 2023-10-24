@@ -15,7 +15,9 @@ public class login_page extends AppCompatActivity {
     private EditText account;
     private EditText password;
     private AppCompatButton login;
+
     private AppCompatButton registerS;
+    private AppCompatButton cancel;
 
 
     @Override
@@ -27,6 +29,7 @@ public class login_page extends AppCompatActivity {
         password = findViewById(R.id.PasswordInput);
         login = findViewById(R.id.LoginButton);
         registerS = findViewById(R.id.RegisterButton);
+        cancel = findViewById(R.id.CancelButton);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +50,15 @@ public class login_page extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(login_page.this, register_page.class);
+                startActivity(intent);
+            }
+        });
+
+        //按取消按鈕會回到主頁
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(login_page.this, MainActivity.class);
                 startActivity(intent);
             }
         });
