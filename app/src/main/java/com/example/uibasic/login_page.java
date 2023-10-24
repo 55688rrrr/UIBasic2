@@ -222,6 +222,12 @@ public class login_page extends AppCompatActivity {
                         // 打印其他字段
                     }
 
+                    //創建intent對象
+                    Intent intent = new Intent(login_page.this, MainActivity.class);
+
+                    //啟動主畫面act
+                    startActivity(intent);
+
 
                 } else {
                     // 登录失败
