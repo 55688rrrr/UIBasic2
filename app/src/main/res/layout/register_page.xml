@@ -36,7 +36,7 @@
         android:layout_marginTop="430dp"
         android:layout_marginEnd="135dp"
         android:layout_marginBottom="280dp"
-        android:text="取消註冊"
+        android:text="取消"
         android:textSize="18sp"
         android:background="@color/itemBlue" />
 
@@ -54,13 +54,13 @@
         android:layout_marginBottom="540dp"
         android:ems="10"
         android:inputType="text"
-        android:hint="姓名"
+        android:text="姓名"
         android:textSize="18sp" />
 
     <EditText
         android:id="@+id/AccountInput"
         android:layout_width="250dp"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -71,8 +71,9 @@
         android:layout_marginBottom="490dp"
         android:ems="10"
         android:inputType="text"
-        android:hint="帳號"
-        android:textSize="18sp" />
+        android:text="帳號"
+        android:textSize="18sp"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
         android:id="@+id/PasswordInput"
@@ -87,8 +88,8 @@
         android:layout_marginEnd="80dp"
         android:layout_marginBottom="440dp"
         android:ems="10"
-        android:inputType="textPassword"
-        android:hint="密碼"
+        android:inputType="text"
+        android:text="密碼"
         android:textSize="18sp" />
 
 </RelativeLayout>

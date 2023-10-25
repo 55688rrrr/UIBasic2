@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainBlue"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+    <!-- Add your child views or layouts here -->
+
+
+
+
+    <!-- 0813 -->
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/barrel_gif"
+        android:layout_width="200dp"
+        android:layout_height="300dp"
+        android:src="@drawable/barrel_1"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="450dp"
+        android:layout_marginEnd="250dp"
+        android:layout_marginBottom="50dp" />
+
+    <!-- 0813 -->
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/seaweed_gif"
+        android:layout_width="300dp"
+        android:layout_height="450dp"
+        android:src="@drawable/seaweed_1"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="350dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="-80dp" />
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/seaweed_gif_2"
+        android:layout_width="300dp"
+        android:layout_height="450dp"
+        android:src="@drawable/seaweed_1"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="400dp"
+        android:layout_marginEnd="-30dp"
+        android:layout_marginBottom="-100dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="600dp"
+        android:layout_marginEnd="270dp"
+        android:layout_marginBottom="90dp"
+        android:background="@color/itemBlue"
+        app:layout_constraintTop_toTopOf="@+id/imageButton"
+        app:srcCompat="@drawable/ic_edit"
+        android:contentDescription="This button performs a specific action"
+        />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="165dp"
+        android:layout_marginTop="600dp"
+        android:layout_marginEnd="165dp"
+        android:layout_marginBottom="90dp"
+        android:background="@color/itemBlue"
+        app:srcCompat="@drawable/ic_feed"
+        android:contentDescription="This button performs a specific action" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="270dp"
+        android:layout_marginTop="600dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="90dp"
+        android:background="@color/itemBlue"
+        app:srcCompat="@drawable/ic_share"
+        android:contentDescription="This button performs a specific action"
+        />
+
+
+
+    <!-- 0806 -->
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/fish_gif"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="200dp"
+        android:src="@drawable/blue_fish" />
+    <!-- 0821 -->
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/fish_gif_2"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginBottom="200dp"
+        android:src="@drawable/blue_fish" />
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/bw_fish"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="400dp"
+        android:layout_marginBottom="200dp"
+        android:src="@drawable/black_white_fish" />
+    <!-- 0827 -->
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/bw_fish_2"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="380dp"
+        android:src="@drawable/black_white_fish" />
+
+    <!-- 0807 -->
+    <Button
+        android:id="@+id/addFish"
+        style="@style/TextAppearance.AppCompat.Widget.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1"
+        android:padding="3dp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 0930 -->
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/blue_fish_0"
+        android:src="@drawable/blue_fish"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:autoStart="false"
+        android:autoMirrored="true"
+        android:repeatCount="-1"
+        android:visible="false" />
+
+    <!-- repeatCount=-1: repeat as long as it is displayed (once start() is called) -->
+    <!-- 1009: set visibility -->
+
+
+</RelativeLayout>
