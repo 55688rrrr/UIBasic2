@@ -24,9 +24,9 @@
             android:layout_height="56dp"
             android:id="@+id/toolbar"
             android:elevation="4dp"
-            android:background="@color/lavender"
+            android:background="@color/itemBlue"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            android:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+            android:popupTheme="@style/ThemeOverlay.AppCompat.Dark"/>
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -40,8 +40,8 @@
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/nav_menu"
-        app:itemIconTint="@color/lavender"
-        app:itemTextColor="@color/lavender"/>
+        app:itemIconTint="@color/iconBlue"
+        app:itemTextColor="@color/iconBlue"/>
 
 
 

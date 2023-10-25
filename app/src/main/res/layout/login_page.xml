@@ -40,10 +40,26 @@
         android:text="註冊"
         android:textSize="18sp" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/CancelButton"
+        android:layout_width="200sp"
+        android:layout_height="45dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="135dp"
+        android:layout_marginTop="490dp"
+        android:layout_marginEnd="135dp"
+        android:layout_marginBottom="220dp"
+        android:background="@color/itemBlue"
+        android:text="取消"
+        android:textSize="18sp" />
+
     <EditText
         android:id="@+id/AccountInput"
         android:layout_width="250dp"
-        android:layout_height="48dp"
+        android:layout_height="45dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -54,9 +70,8 @@
         android:layout_marginBottom="490dp"
         android:ems="10"
         android:inputType="text"
-        android:text="帳號"
-        android:textSize="18sp"
-        tools:ignore="TouchTargetSizeCheck" />
+        android:hint="帳號"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/PasswordInput"
@@ -71,9 +86,9 @@
         android:layout_marginEnd="80dp"
         android:layout_marginBottom="440dp"
         android:ems="10"
-        android:inputType="text"
-        android:text="密碼"
+        android:inputType="textPassword"
+        android:hint="密碼"
         android:textSize="18sp"
-        tools:ignore="TouchTargetSizeCheck" />
+        />
 
 </RelativeLayout>

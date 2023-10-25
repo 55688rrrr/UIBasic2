@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
@@ -81,11 +82,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        */
 //
 //        //0827 按中間那顆可以切到登入畫面
-//        mdbt = findViewById(R.id.imageButton);
-//        mdbt.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, login_page.class);
+//        mdbt = (ImageButton) LayoutInflater.from(getApplication()).inflate(R.layout.fragment_home, null);
+ //       mdbt.setOnClickListener(new View.OnClickListener() {
+ //           @Override
+ //           public void onClick(View v) {
+ //               Intent intent = new Intent(MainActivity.this, login_page.class);
 //                startActivity(intent);
 //            }
 //        });
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AboutFragment()).commit();
                 break;
             case R.id.nav_logout:
-                Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Logged out!", Toast.LENGTH_SHORT).show();
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
