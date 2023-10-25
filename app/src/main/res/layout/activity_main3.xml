@@ -19,7 +19,8 @@
         android:background="@color/white"
         android:contentDescription="TODO"
         app:srcCompat="@drawable/bf_pic"
-        android:onClick="onClick"/>
+        android:onClick="onClick"
+        tools:ignore="MissingConstraints" />
         <!--
         android:layout_marginStart="100dp"
         android:layout_marginTop="300dp"
@@ -59,6 +60,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/btnAddItem" />
+        android:layout_above="@+id/btnAddItem"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
