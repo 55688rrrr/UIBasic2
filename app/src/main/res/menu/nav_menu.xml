@@ -15,12 +15,12 @@
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/nav_settings"
-            android:title="Settings"/>
+            android:title="Timer"/>
 
         <item
             android:id="@+id/nav_share"
             android:icon="@drawable/nav_share"
-            android:title="Share"/>
+            android:title="Calendar"/>
 
         <item
             android:id="@+id/nav_about"
