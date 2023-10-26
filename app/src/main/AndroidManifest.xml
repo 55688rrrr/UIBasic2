@@ -16,15 +16,20 @@
         tools:targetApi="31">
         <activity
             android:name=".MainActivity3"
-            android:exported="false" />
+            android:exported="true" >
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+            <!-- 1025 android:exported 改成true試試看 -->
+            <!-- 1025 但是加上intent-filter那串好像就當掉ㄌ？？？:( -->
         <activity
             android:name=".register_page"
             android:exported="true" />
         <activity
             android:name=".login_page"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity2"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

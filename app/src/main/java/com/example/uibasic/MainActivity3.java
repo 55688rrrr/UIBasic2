@@ -31,27 +31,33 @@ public class MainActivity3 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
 
-        //1009 試試看？？
-        lvItems = (ListView) findViewById(R.id.lvItems);
-        bfList = new ArrayList<GifDrawable>();
-        bfList_Adapter = new ArrayAdapter<GifDrawable>(this,
-                android.R.layout.simple_list_item_1, bfList);
-        lvItems.setAdapter(bfList_Adapter);
+//        //1009 試試看？？
+//        lvItems = (ListView) findViewById(R.id.lvItems);
+//        bfList = new ArrayList<GifDrawable>();
+//        bfList_Adapter = new ArrayAdapter<GifDrawable>(this,
+//                android.R.layout.simple_list_item_1, bfList);
+//        lvItems.setAdapter(bfList_Adapter);
 
         //1009
         ImageButton add_blueFish = findViewById(R.id.add_blueFish);
         add_blueFish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //1025 這樣可以回到主頁面＆加上魚：）
+                //setContentView(R.layout.activity_main);
+                //❗️可是著畫面右邊那個按鈕只能按一次？！左邊那個也沒用了:(
+
                 GifImageView blue_fish_0 = findViewById(R.id.blue_fish_0);
-                //1009 試試看的時候自己跑出來...？？？？
-                //GifDrawable blueFish0 = null;
+                //1025
+                blue_fish_0.setX((int)(Math.random()*1000));
+                blue_fish_0.setY((int)(Math.random()*2000));
+
                 try {
                     GifDrawable blueFish0 = new GifDrawable(getResources(), R.drawable.blue_fish);
                     blue_fish_0.setImageDrawable(blueFish0);
-                        //1009 試試看？？
-                        bfList.add(blueFish0);
-                        bfList_Adapter.add(blueFish0);
+//                        //1009 試試看？？
+//                        bfList.add(blueFish0);
+//                        bfList_Adapter.add(blueFish0);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

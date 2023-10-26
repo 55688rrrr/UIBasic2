@@ -6,6 +6,9 @@ android {
     namespace 'com.example.uibasic'
     compileSdk 33
 
+    //1026
+    dataBinding.enabled = true
+
     defaultConfig {
         applicationId "com.example.uibasic"
         minSdk 19

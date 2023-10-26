@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/mainBlue"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".HomeFragment">
 
 
     <!-- 0813 -->
