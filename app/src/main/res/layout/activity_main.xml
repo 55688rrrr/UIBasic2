@@ -14,6 +14,155 @@
 
 
 
+    <!-- 1027 把fragment_home.xml包進來試試看 -->
+    <!-- 放前面，才不會把後面的設計蓋掉 -->
+    <RelativeLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mainBlue"
+        android:orientation="vertical"
+        tools:context=".HomeFragment">
+
+
+        <!-- 0813 背景裝飾：木桶 -->
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/barrel_gif"
+            android:layout_width="200dp"
+            android:layout_height="300dp"
+            android:src="@drawable/barrel_1"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="450dp"
+            android:layout_marginEnd="250dp"
+            android:layout_marginBottom="50dp" />
+        <!-- 0813 背景裝飾：海草1 -->
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/seaweed_gif"
+            android:layout_width="300dp"
+            android:layout_height="450dp"
+            android:src="@drawable/seaweed_1"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="350dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="-80dp" />
+        <!-- 0813 背景裝飾：海草2 -->
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/seaweed_gif_2"
+            android:layout_width="300dp"
+            android:layout_height="450dp"
+            android:src="@drawable/seaweed_1"
+            android:layout_marginStart="300dp"
+            android:layout_marginTop="400dp"
+            android:layout_marginEnd="-30dp"
+            android:layout_marginBottom="-100dp" />
+
+
+
+        <!-- 左邊按鈕 -->
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="580dp"
+            android:layout_marginEnd="270dp"
+            android:layout_marginBottom="60dp"
+            android:background="@color/itemBlue"
+            app:layout_constraintTop_toTopOf="@+id/imageButton"
+            app:srcCompat="@drawable/ic_edit" />
+        <!-- 中間按鈕 -->
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="165dp"
+            android:layout_marginTop="580dp"
+            android:layout_marginEnd="165dp"
+            android:layout_marginBottom="60dp"
+            android:background="@color/itemBlue"
+            app:srcCompat="@drawable/ic_feed" />
+        <!-- 右邊按鈕 -->
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="270dp"
+            android:layout_marginTop="580dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginBottom="60dp"
+            android:background="@color/itemBlue"
+            app:srcCompat="@drawable/ic_share" />
+
+
+
+        <!-- 0806 固定游動的藍魚1 -->
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/fish_gif"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginBottom="200dp"
+            android:src="@drawable/blue_fish" />
+        <!-- 0821 固定游動的藍魚2 -->
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/fish_gif_2"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="300dp"
+            android:layout_marginBottom="200dp"
+            android:src="@drawable/blue_fish" />
+        <!-- 0821 固定游動的黑白魚1 -->
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/bw_fish"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="400dp"
+            android:layout_marginBottom="200dp"
+            android:src="@drawable/black_white_fish" />
+        <!-- 0827 固定游動的黑白魚2 -->
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/bw_fish_2"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginBottom="380dp"
+            android:src="@drawable/black_white_fish" />
+
+
+
+        <!-- 0930 事先寫好之後再呼叫的藍魚 -->
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/blue_fish_0"
+            android:src="@drawable/blue_fish"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:autoStart="false"
+            android:autoMirrored="true"
+            android:repeatCount="-1"
+            android:visible="false" />
+        <!-- repeatCount=-1: repeat as long as it is displayed (once start() is called) -->
+        <!-- 1009: set visibility -->
+
+    </RelativeLayout>
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -42,7 +191,6 @@
         app:menu="@menu/nav_menu"
         app:itemIconTint="@color/iconBlue"
         app:itemTextColor="@color/iconBlue"/>
-
 
 
 

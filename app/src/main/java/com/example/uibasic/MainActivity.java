@@ -14,6 +14,10 @@ import com.google.android.material.navigation.NavigationView;
 import android.view.View;
 import android.view.LayoutInflater;
 
+//1028
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
