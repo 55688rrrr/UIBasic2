@@ -27,10 +27,19 @@
             <!-- 1025 但是加上intent-filter那串好像就當掉ㄌ？？？:( -->
         <activity
             android:name=".register_page"
-            android:exported="true" />
-        <activity
-            android:name=".login_page"
-            android:exported="false" />
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".login_page" android:exported="true" android:theme="@style/Theme.AppCompat">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
