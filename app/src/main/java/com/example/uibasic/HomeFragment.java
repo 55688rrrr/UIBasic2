@@ -16,18 +16,77 @@ import android.widget.ImageButton;
 //????
 import android.content.Intent;
 
-
-
 public class HomeFragment extends Fragment {
+
+    private ImageButton addFish;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        // 初始化控制元件
+        GifImageView blue_fish_0 = view.findViewById(R.id.blue_fish_0);
+        GifImageView fish_gif = view.findViewById(R.id.fish_gif);
+        GifImageView fish_gif_2 = view.findViewById(R.id.fish_gif_2);
+        GifImageView bw_fish = view.findViewById(R.id.bw_fish);
+        GifImageView bw_fish_2 = view.findViewById(R.id.bw_fish_2);
+        GifImageView seaweed_gif = view.findViewById(R.id.seaweed_gif);
+        GifImageView barrel_gif = view.findViewById(R.id.barrel_gif);
+        GifImageView seaweed_gif_2 = view.findViewById(R.id.seaweed_gif_2);
+
+        // 設定事件監聽
+        addFish = view.findViewById(R.id.imageButton3);
+        addFish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                blue_fish_0.setVisibility(View.VISIBLE);
+                blue_fish_0.setX((int) (Math.random() * 1000));
+                blue_fish_0.setY((int) (Math.random() * 2000));
+                try {
+                    GifDrawable blueFish0 = new GifDrawable(getResources(), R.drawable.blue_fish);
+                    blue_fish_0.setImageDrawable(blueFish0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        ImageButton mdbt = view.findViewById(R.id.imageButton);
+        mdbt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), login_page.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageButton rtbt = view.findViewById(R.id.imageButton2);
+        rtbt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MainActivity3.class);
+                startActivity(intent);
+            }
+        });
+
+        return view;
+    }
+}
+
+/*public class HomeFragment extends Fragment {
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
+
         //1026 試試看包進inner class？？？ :'/
         class try1026 extends AppCompatActivity {
-            /*ImageButton addFish;
+            ImageButton addFish;
 
             @Override
             protected void onCreate (Bundle savedInstanceState){
@@ -117,7 +176,7 @@ public class HomeFragment extends Fragment {
                     }
                 });
 
-            }*/
+            }
         }
 
             //1026  移到下面，不然上面的inner class不會被執行🥲
@@ -127,7 +186,7 @@ public class HomeFragment extends Fragment {
 
     }
 
-}
+}*/
 
 
 
