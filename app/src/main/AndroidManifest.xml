@@ -16,6 +16,7 @@
         tools:targetApi="31">
         <activity
             android:name=".MainActivity3"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:exported="true" >
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
@@ -27,9 +28,11 @@
             <!-- 1025 但是加上intent-filter那串好像就當掉ㄌ？？？:( -->
         <activity
             android:name=".register_page"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:exported="true" />
         <activity
             android:name=".login_page"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
