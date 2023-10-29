@@ -4,8 +4,8 @@ public class Daily {
     private String userId;
     private String daily_id;
     private String daily_name;
-    private String daily_goal;
-    private String daily_done;
+    private Integer daily_goal;
+    private Integer daily_done;
     private String daily_color;
 
     public void setUserId(String userId) {
@@ -20,11 +20,11 @@ public class Daily {
         this.daily_name = daily_name;
     }
 
-    public void setDaily_goal(String daily_goal) {
+    public void setDaily_goal(Integer daily_goal) {
         this.daily_goal = daily_goal;
     }
 
-    public void setDaily_done(String daily_done) {
+    public void setDaily_done(Integer daily_done) {
         this.daily_done = daily_done;
     }
 
@@ -44,11 +44,11 @@ public class Daily {
         return daily_name;
     }
 
-    public String getDaily_goal() {
+    public Integer getDaily_goal() {
         return daily_goal;
     }
 
-    public String getDaily_done() {
+    public Integer getDaily_done() {
         return daily_done;
     }
 

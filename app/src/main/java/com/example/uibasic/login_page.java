@@ -1,36 +1,26 @@
 package com.example.uibasic;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
-import android.widget.ImageButton;
 
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
 
 import android.widget.EditText;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 
 
 public class login_page extends AppCompatActivity {
@@ -42,9 +32,18 @@ public class login_page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
 
+        Button RegisterButton = findViewById(R.id.RegisterButton);
         Button LoginButton = findViewById(R.id.LoginButton);
         EditText AccountInput = findViewById(R.id.AccountInput);
         EditText PasswordInput = findViewById(R.id.PasswordInput);
+
+        RegisterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(login_page.this, register_page.class);
+                startActivity(intent);
+            }
+        });
 
         //用sqlCon連資料庫
         new Thread(new Runnable() {
@@ -66,8 +65,9 @@ public class login_page extends AppCompatActivity {
 
                         //insert into db
                         //insertDataIntoDatabase(name, account, pass,con);
+                        //new OutputDailyTask(login_page.this).execute(account);
                         new OutputDatabaseTask(login_page.this).execute(account, pass);
-                        new OutputDailyTask(login_page.this).execute(account);
+                        //new OutputDailyTask(login_page.this).execute(account);
 
                     }
                 });
@@ -77,7 +77,7 @@ public class login_page extends AppCompatActivity {
 
 
 
-    private class OutputDatabaseTask extends AsyncTask<String, Void, ArrayList<User>> {
+    private class OutputDatabaseTask extends AsyncTask<String, Void, User> {
 
         private AppCompatActivity activity;
 
@@ -86,15 +86,15 @@ public class login_page extends AppCompatActivity {
         }
 
         @Override
-        protected ArrayList<User>  doInBackground(String... params) {
-            ArrayList<User> userList = new ArrayList<>();
+        protected User   doInBackground(String... params) {
+            User user=null;
 
             String account = params[0];
             String pass = params[1];
 
             if (con == null) {
                 // 数据库连接失败
-                return userList; // 返回空的ArrayList
+                return user; // 返回空的ArrayList
             } else {
                 try {
                     String query = "SELECT * FROM user WHERE user_id = ? AND user_pass = ?";
@@ -110,12 +110,13 @@ public class login_page extends AppCompatActivity {
                         // 其他字段也可以类似获取
 
                         // 创建User对象并添加到ArrayList中
-                        User user = new User();
+                        user = new User();
                         user.setUserId(userId);
                         user.setUserName(userName);
+
                         // 设置其他字段
 
-                        userList.add(user);
+
                     }
 
 
@@ -133,33 +134,37 @@ public class login_page extends AppCompatActivity {
                     }
                 }
 
-                return userList;
+                return user;
             }
         }
 
 
 
         @Override
-        protected void onPostExecute(ArrayList<User> userList) {
-            if (!userList.isEmpty()) {
+        protected void onPostExecute(User user) {
+            if (user!=null) {
                 // 登录成功
+
+
                 Toast.makeText(login_page.this, "登入成功", Toast.LENGTH_SHORT).show();
                 System.err.println("gogo");
 
-                for (User user : userList) {
-                    System.out.println("User ID: " + user.getUserId());
-                    System.out.println("User Name: " + user.getUserName());
-                    // 打印其他字段
-                }
+                String userId = user.getUserId();
+                String userName = user.getUserName();
+
+                //傳入daily
+                //new OutputDailyTask(login_page.this).execute(userId);
+
+                // 打印用户的帐号和密码
+                System.out.println("User ID: " + userId);
+                System.out.println("User Name: " + userName);
+
 
                 SharedViewModel sharedViewModel = new ViewModelProvider(activity).get(SharedViewModel.class);
-                sharedViewModel.setUserList(userList);
+                sharedViewModel.setUser(user);
 
                 //創建intent對象
                 Intent intent = new Intent(login_page.this, MainActivity.class);
-
-                // 将ArrayList<User>放入Intent中
-                //intent.putParcelableArrayListExtra("userList", (ArrayList<? extends Parcelable>) userList);
 
                 //啟動主畫面act
                 startActivity(intent);
@@ -210,8 +215,8 @@ public class login_page extends AppCompatActivity {
                         String dailyId = resultSet1.getString("daily_id");
                         String userId = resultSet1.getString("user_id");
                         String dailyName = resultSet1.getString("daily_name");
-                        String dailyGoal = resultSet1.getString("goal");
-                        String dailyDone = resultSet1.getString("done");
+                        Integer dailyGoal = resultSet1.getInt("goal");
+                        Integer dailyDone = resultSet1.getInt("done");
                         String dailycolor = resultSet1.getString("color");
                         // 其他字段也可以类似获取
 
@@ -260,11 +265,11 @@ public class login_page extends AppCompatActivity {
 
                 for (Daily daily : dailyList) {
                     System.out.println("User ID: " + daily.getUserId());
-                    System.out.println("User Daily Id: " + daily.getDaily_id());
-                    System.out.println("User Daily Name: " + daily.getDaily_name());
-                    //System.out.println("User ID: " + daily.getDaily_goal());
-                    //System.out.println("User ID: " + daily.getUserId());
-                    //System.out.println("User ID: " + daily.getUserId());
+                    System.out.println("Daily Id: " + daily.getDaily_id());
+                    System.out.println("Daily Name: " + daily.getDaily_name());
+                    System.out.println("Goal: " + daily.getDaily_goal());
+                    System.out.println("Done: " + daily.getDaily_done());
+                    System.out.println("Color: " + daily.getDaily_color());
                     // 打印其他字段
                 }
 
@@ -272,13 +277,13 @@ public class login_page extends AppCompatActivity {
                 sharedViewModel.setDailyList(dailyList);
 
                 // 创建Intent对象
-                Intent intent = new Intent(login_page.this, MainActivity.class);
+                //Intent intent = new Intent(login_page.this, MainActivity.class);
 
                 // 将ArrayList<Daily>放入Intent中
                 //intent.putParcelableArrayListExtra("dailyList", (ArrayList<? extends Parcelable>) dailyList);
 
                 //啟動主畫面act
-                startActivity(intent);
+                //startActivity(intent);
             } else {
                 // 取出失敗
                 //Toast.makeText(login_page.this, "登入失敗", Toast.LENGTH_SHORT).show();

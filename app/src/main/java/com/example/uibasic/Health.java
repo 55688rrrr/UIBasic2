@@ -5,31 +5,31 @@ public class Health {
     private String userId;
     private String health_id;
     private String health_name;
-    private String health_goal;
-    private String health_done;
+    private Integer health_goal;
+    private Integer health_done;
     private String health_color;
 
     public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public void setDaily_id(String daily_id) {
+    public void setHealth_id(String health_id) {
         this.health_id = health_id;
     }
 
-    public void setDaily_name(String daily_name) {
+    public void setHealth_name(String health_name) {
         this.health_name = health_name;
     }
 
-    public void setDaily_goal(String daily_goal) {
+    public void setHealth_goal(Integer health_goal) {
         this.health_goal = health_goal;
     }
 
-    public void setDaily_done(String daily_done) {
+    public void setHealth_done(Integer health_done) {
         this.health_done = health_done;
     }
 
-    public void setDaily_color(String daily_color) {
+    public void setHealth_color(String health_color) {
         this.health_color = health_color;
     }
 
@@ -37,23 +37,23 @@ public class Health {
         return userId;
     }
 
-    public String getDaily_id() {
+    public String getHealth_id() {
         return health_id;
     }
 
-    public String getDaily_name() {
+    public String getHealth_name() {
         return health_name;
     }
 
-    public String getDaily_goal() {
+    public Integer getHealth_goal() {
         return health_goal;
     }
 
-    public String getDaily_done() {
+    public Integer getHealth_done() {
         return health_done;
     }
 
-    public String getDaily_color() {
+    public String getHealth_color() {
         return health_color;
     }
     // 构造函数、Getter和Setter方法等

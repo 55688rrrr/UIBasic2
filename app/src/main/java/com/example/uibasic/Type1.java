@@ -5,31 +5,31 @@ public class Type1 {
     private String userId;
     private String type1_id;
     private String type1_name;
-    private String type1_deadline;
-    private String type1_done;
+    private Integer type1_deadline;
+    private Integer type1_done;
     private String type1_color;
 
     public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public void setDaily_id(String daily_id) {
+    public void setType1_id(String type1_id) {
         this.type1_id = type1_id;
     }
 
-    public void setDaily_name(String daily_name) {
+    public void setType1_name(String type1_name) {
         this.type1_name = type1_name;
     }
 
-    public void setDaily_goal(String daily_goal) {
+    public void setType1_goal(Integer type1_deadline) {
         this.type1_deadline = type1_deadline;
     }
 
-    public void setDaily_done(String daily_done) {
+    public void setType1_done(Integer type1_done) {
         this.type1_done = type1_done;
     }
 
-    public void setDaily_color(String daily_color) {
+    public void setType1_color(String type1_color) {
         this.type1_color = type1_color;
     }
 
@@ -37,23 +37,23 @@ public class Type1 {
         return userId;
     }
 
-    public String getDaily_id() {
+    public String getType1_id() {
         return type1_id;
     }
 
-    public String getDaily_name() {
+    public String getType1_name() {
         return type1_name;
     }
 
-    public String getDaily_goal() {
+    public Integer getType1_goal() {
         return type1_deadline;
     }
 
-    public String getDaily_done() {
+    public Integer getType1_done() {
         return type1_done;
     }
 
-    public String getDaily_color() {
+    public String getType1_color() {
         return type1_color;
     }
     // 构造函数、Getter和Setter方法等
