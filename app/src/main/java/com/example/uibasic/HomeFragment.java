@@ -27,7 +27,7 @@ public class HomeFragment extends Fragment {
 
         //1026 試試看包進inner class？？？ :'/
         class try1026 extends AppCompatActivity {
-            ImageButton addFish;
+            /*ImageButton addFish;
 
             @Override
             protected void onCreate (Bundle savedInstanceState){
@@ -117,7 +117,7 @@ public class HomeFragment extends Fragment {
                     }
                 });
 
-            }
+            }*/
         }
 
             //1026  移到下面，不然上面的inner class不會被執行🥲
