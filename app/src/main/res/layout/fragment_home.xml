@@ -112,6 +112,7 @@
         android:layout_marginBottom="200dp"
         android:src="@drawable/blue_fish" />
         -->
+    <!--
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/bw_fish"
         android:layout_width="match_parent"
@@ -120,7 +121,8 @@
         android:layout_marginTop="400dp"
         android:layout_marginBottom="200dp"
         android:src="@drawable/black_white_fish" />
-    <!-- 0827 -->
+        -->
+    <!-- 0827
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/bw_fish_2"
         android:layout_width="match_parent"
@@ -129,6 +131,7 @@
         android:layout_marginTop="200dp"
         android:layout_marginBottom="380dp"
         android:src="@drawable/black_white_fish" />
+    -->
 
     <!-- 0807 -->
     <Button
@@ -146,7 +149,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- 0930 -->
+    <!-- 0930
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/blue_fish_0"
@@ -157,6 +160,7 @@
         android:autoMirrored="true"
         android:repeatCount="-1"
         android:visible="false" />
+        -->
 
     <!--
     <FrameLayout

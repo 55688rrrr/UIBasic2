@@ -55,11 +55,11 @@ public class HomeFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
         // 初始化控制元件
-        GifImageView blue_fish_0 = view.findViewById(R.id.blue_fish_0);
+        //GifImageView blue_fish_0 = view.findViewById(R.id.blue_fish_0);
         //GifImageView fish_gif = view.findViewById(R.id.fish_gif);
         //GifImageView fish_gif_2 = view.findViewById(R.id.fish_gif_2);
-        GifImageView bw_fish = view.findViewById(R.id.bw_fish);
-        GifImageView bw_fish_2 = view.findViewById(R.id.bw_fish_2);
+        //GifImageView bw_fish = view.findViewById(R.id.bw_fish);
+        //GifImageView bw_fish_2 = view.findViewById(R.id.bw_fish_2);
         GifImageView seaweed_gif = view.findViewById(R.id.seaweed_gif);
         GifImageView barrel_gif = view.findViewById(R.id.barrel_gif);
         GifImageView seaweed_gif_2 = view.findViewById(R.id.seaweed_gif_2);
@@ -67,84 +67,33 @@ public class HomeFragment extends Fragment {
         //json
         // 讀取 JSON 檔案中的 daily 資料
         String jsonDailyData = readJsonFromFile("daily_data.json");
-
         // 解析 JSON 字串為 ArrayList<Daily> 物件
         ArrayList<Daily> dailyList = parseJsonToDailyList(jsonDailyData);
         System.out.println("jsonnnnnnnnnnnnn "+ dailyList.size());
 
-        for (Daily daily : dailyList) {
-            System.out.println("User ID: " + daily.getUserId());
-            System.out.println("Daily Id: " + daily.getDaily_id());
-            System.out.println("Daily Name: " + daily.getDaily_name());
-            System.out.println("Goal: " + daily.getDaily_goal());
-            System.out.println("Done: " + daily.getDaily_done());
-            System.out.println("Color: " + daily.getDaily_color());
-            // 打印其他字段
-        }
+        // 讀取 JSON 檔案中的 eat 資料
+        String jsonEatData = readJsonFromFile("eat_data.json");
+        // 解析 JSON 字串為 ArrayList<Eat> 物件
+        ArrayList<Eat> eatList = parseJsonToEatList(jsonEatData);
+        System.out.println("jsonnnnnnnnnnnnn "+ eatList.size());
 
-        //Intent intent = getActivity().getIntent();
+        // 讀取 JSON 檔案中的 health 資料
+        String jsonHealthData = readJsonFromFile("health_data.json");
+        // 解析 JSON 字串為 ArrayList<Health> 物件
+        ArrayList<Health> healthList = parseJsonToHealthList(jsonHealthData);
+        System.out.println("jsonnnnnnnnnnnnn "+ healthList.size());
 
+        // 讀取 JSON 檔案中的 type1 資料
+        String jsonType1Data = readJsonFromFile("type1_data.json");
+        // 解析 JSON 字串為 ArrayList<Type1> 物件
+        ArrayList<Type1> type1List = parseJsonToType1List(jsonType1Data);
+        System.out.println("jsonnnnnnnnnnnnn "+ type1List.size());
 
-        //System.out.println("User ID: "+ userId);
-        //System.out.println("User Name: " + userName);
-
-        // 创建 OutputDailyTask 对象并执行异步任务
-        //用sqlCon連資料庫
-        /*new Thread(new Runnable() {
-            @Override
-            public void run() {
-                sqlCon connection = new sqlCon();
-                con = connection.run();
-                //con = connection.getConnection();
-                if (con == null) {
-                    System.err.println("数据库连接失败：con 为 null");
-                }else{
-                    OutputDailyTask outputDailyTask = new OutputDailyTask(getActivity());
-                    outputDailyTask.execute(userId);
-
-                }
-
-            }
-        }).start();*/ // 启动新线程
-
-        // 创建 OutputEatTask 对象并执行异步任务
-        //用sqlCon連資料庫
-        /*new Thread(new Runnable() {
-            @Override
-            public void run() {
-                sqlCon connection = new sqlCon();
-                con = connection.run();
-                //con = connection.getConnection();
-                if (con == null) {
-                    System.err.println("数据库连接失败：con 为 null");
-                }else{
-                    OutputEatTask OutputEatTask = new OutputEatTask(getActivity());
-                    OutputEatTask.execute(userId);
-
-                }
-
-            }
-        }).start();*/ // 启动新线程
-
-        // 创建 OutputHealthTask 对象并执行异步任务
-        //用sqlCon連資料庫
-        /*new Thread(new Runnable() {
-            @Override
-            public void run() {
-                sqlCon connection = new sqlCon();
-                con = connection.run();
-                //con = connection.getConnection();
-                if (con == null) {
-                    System.err.println("数据库连接失败：con 为 null");
-                }else{
-                    OutputHealthTask OutputHealthTask = new OutputHealthTask(getActivity());
-                    OutputHealthTask.execute(userId);
-
-                }
-
-            }
-        }).start();*/
-        // 启动新线程
+        // 讀取 JSON 檔案中的 type2 資料
+        String jsonType2Data = readJsonFromFile("type2_data.json");
+        // 解析 JSON 字串為 ArrayList<Type2> 物件
+        ArrayList<Type2> type2List = parseJsonToType2List(jsonType2Data);
+        System.out.println("jsonnnnnnnnnnnnn "+ type2List.size());
 
 
         /*this.container = view.findViewById(R.id.container);
@@ -177,7 +126,7 @@ public class HomeFragment extends Fragment {
             this.container.addView(fish);
         }*/
 
-
+        //daily fish
         int gifCount = dailyList.size();
         System.out.println(gifCount);
 
@@ -197,9 +146,89 @@ public class HomeFragment extends Fragment {
             relativeLayout.addView(gifImageView);
         }
 
+        //Eat fish
+        int gifCount1 = eatList.size();
+        System.out.println(gifCount1);
 
-        // 設定事件監聽
-        addFish = view.findViewById(R.id.imageButton3);
+        // 動態添加GifImageView到RelativeLayout
+        RelativeLayout relativeLayout1 = view.findViewById(R.id.linearLayout);
+        for (int i = 0; i < gifCount1; i++) {
+            GifImageView gifImageView = new GifImageView(requireContext());
+            // 設定GifImageView的圖片、寬度、高度以及隨機位置
+            gifImageView.setImageResource(R.drawable.black_white_fish); // 替換為你的Gif圖片資源
+            int width = ViewGroup.LayoutParams.MATCH_PARENT;
+            int height = 300;
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, height);
+            params.leftMargin = (int) (Math.random() * 800); // 隨機X坐標
+            params.topMargin =  (int) (Math.random() * 1500); // 隨機Y坐標
+            gifImageView.setLayoutParams(params);
+            // 將GifImageView添加到RelativeLayout
+            relativeLayout1.addView(gifImageView);
+        }
+
+        //Health fish
+        int gifCount2 = healthList.size();
+        System.out.println(gifCount2);
+
+        // 動態添加GifImageView到RelativeLayout
+        RelativeLayout relativeLayout2 = view.findViewById(R.id.linearLayout);
+        for (int i = 0; i < gifCount2; i++) {
+            GifImageView gifImageView = new GifImageView(requireContext());
+            // 設定GifImageView的圖片、寬度、高度以及隨機位置
+            gifImageView.setImageResource(R.drawable.blue_fish); // 替換為你的Gif圖片資源
+            int width = ViewGroup.LayoutParams.MATCH_PARENT;
+            int height = 300;
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, height);
+            params.leftMargin = (int) (Math.random() * 800); // 隨機X坐標
+            params.topMargin =  (int) (Math.random() * 1500); // 隨機Y坐標
+            gifImageView.setLayoutParams(params);
+            // 將GifImageView添加到RelativeLayout
+            relativeLayout2.addView(gifImageView);
+        }
+
+        //Type1 fish
+        int gifCount3 = type1List.size();
+        System.out.println(gifCount3);
+
+        // 動態添加GifImageView到RelativeLayout
+        RelativeLayout relativeLayout3 = view.findViewById(R.id.linearLayout);
+        for (int i = 0; i < gifCount3; i++) {
+            GifImageView gifImageView = new GifImageView(requireContext());
+            // 設定GifImageView的圖片、寬度、高度以及隨機位置
+            gifImageView.setImageResource(R.drawable.blue_fish); // 替換為你的Gif圖片資源
+            int width = ViewGroup.LayoutParams.MATCH_PARENT;
+            int height = 300;
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, height);
+            params.leftMargin = (int) (Math.random() * 800); // 隨機X坐標
+            params.topMargin =  (int) (Math.random() * 1500); // 隨機Y坐標
+            gifImageView.setLayoutParams(params);
+            // 將GifImageView添加到RelativeLayout
+            relativeLayout3.addView(gifImageView);
+        }
+
+        //Type2 fish
+        int gifCount4 = type2List.size();
+        System.out.println(gifCount4);
+
+        // 動態添加GifImageView到RelativeLayout
+        RelativeLayout relativeLayout4 = view.findViewById(R.id.linearLayout);
+        for (int i = 0; i < gifCount4; i++) {
+            GifImageView gifImageView = new GifImageView(requireContext());
+            // 設定GifImageView的圖片、寬度、高度以及隨機位置
+            gifImageView.setImageResource(R.drawable.blue_fish); // 替換為你的Gif圖片資源
+            int width = ViewGroup.LayoutParams.MATCH_PARENT;
+            int height = 300;
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, height);
+            params.leftMargin = (int) (Math.random() * 800); // 隨機X坐標
+            params.topMargin =  (int) (Math.random() * 1500); // 隨機Y坐標
+            gifImageView.setLayoutParams(params);
+            // 將GifImageView添加到RelativeLayout
+            relativeLayout4.addView(gifImageView);
+        }
+
+
+        // 隨機魚按鈕
+        /*addFish = view.findViewById(R.id.imageButton3);
         addFish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -213,7 +242,7 @@ public class HomeFragment extends Fragment {
                     e.printStackTrace();
                 }
             }
-        });
+        });*/
 
         ImageButton mdbt = view.findViewById(R.id.imageButton);
         mdbt.setOnClickListener(new View.OnClickListener() {
@@ -237,371 +266,7 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    //daily data
-    private class OutputDailyTask extends AsyncTask<String, Void, ArrayList<Daily>> {
 
-
-        public OutputDailyTask(FragmentActivity activity) {
-        }
-
-        @Override
-        protected ArrayList<Daily>  doInBackground(String... params) {
-            ArrayList<Daily> dailyList = new ArrayList<>();
-
-            String account = params[0];
-
-            if (con == null) {
-                // 数据库连接失败
-                return dailyList; // 返回空的ArrayList
-            } else {
-                try {
-                    String query1 = "SELECT * FROM daily WHERE user_id = ? ";
-                    PreparedStatement preparedStatement1 = con.prepareStatement(query1);
-                    preparedStatement1.setString(1, account);
-                    ResultSet resultSet1 = preparedStatement1.executeQuery();
-
-                    while (resultSet1.next()) {
-                        // 从结果集中获取数据
-                        String dailyId = resultSet1.getString("daily_id");
-                        String userId = resultSet1.getString("user_id");
-                        String dailyName = resultSet1.getString("daily_name");
-                        Integer dailyGoal = resultSet1.getInt("goal");
-                        Integer dailyDone = resultSet1.getInt("done");
-                        String dailycolor = resultSet1.getString("color");
-                        // 其他字段也可以类似获取
-
-                        // 创建User对象并添加到ArrayList中
-                        Daily daily = new Daily(userId, dailyId, dailyName, dailyGoal, dailyDone, dailycolor);
-
-
-                        // 设置其他字段
-
-                        dailyList.add(daily);
-                    }
-
-
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    try {
-                        // 关闭连接
-                        if (con != null && !con.isClosed()) {
-                            con.close();
-                        }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                return dailyList;
-            }
-        }
-
-
-
-        @Override
-        protected void onPostExecute(ArrayList<Daily> dailyList) {
-            if (!dailyList.isEmpty()) {
-                // 日常資料取出成功
-                //Toast.makeText(login_page.this, "登入成功", Toast.LENGTH_SHORT).show();
-                System.err.println("dd gogo");
-
-
-                for (Daily daily : dailyList) {
-                    System.out.println("User ID: " + daily.getUserId());
-                    System.out.println("Daily Id: " + daily.getDaily_id());
-                    System.out.println("Daily Name: " + daily.getDaily_name());
-                    System.out.println("Goal: " + daily.getDaily_goal());
-                    System.out.println("Done: " + daily.getDaily_done());
-                    System.out.println("Color: " + daily.getDaily_color());
-                    // 打印其他字段
-                }
-
-                // 在这里动态添加GifImageView
-                int gifCount = dailyList.size();
-                System.out.println(gifCount);
-
-                // 動態添加GifImageView到RelativeLayout
-                RelativeLayout relativeLayout = view.findViewById(R.id.linearLayout);
-                for (int i = 0; i < gifCount; i++) {
-                    GifImageView gifImageView = new GifImageView(requireContext());
-                    // 設定GifImageView的圖片、寬度、高度以及隨機位置
-                    gifImageView.setImageResource(R.drawable.blue_fish); // 替換為你的Gif圖片資源
-                    int width = ViewGroup.LayoutParams.MATCH_PARENT;
-                    int height = 300;
-                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, height);
-                    params.leftMargin = (int) (Math.random() * 800); // 隨機X坐標
-                    params.topMargin =  (int) (Math.random() * 1500); // 隨機Y坐標
-                    gifImageView.setLayoutParams(params);
-                    // 將GifImageView添加到RelativeLayout
-                    relativeLayout.addView(gifImageView);
-                }
-
-                System.out.println(dailyList.size());
-                HomeFragment.this.dailyList = dailyList;
-                System.out.println(HomeFragment.this.dailyList.size());
-
-
-
-                // 创建Intent对象
-                //Intent intent = new Intent(login_page.this, MainActivity.class);
-
-                // 将ArrayList<Daily>放入Intent中
-                //intent.putParcelableArrayListExtra("dailyList", (ArrayList<? extends Parcelable>) dailyList);
-
-                //啟動主畫面act
-                //startActivity(intent);
-            } else {
-                // 取出失敗
-                System.err.println("dd nono");
-            }
-        }
-    }
-
-    //Eat data
-    private class OutputEatTask extends AsyncTask<String, Void, ArrayList<Eat>> {
-
-
-        public OutputEatTask(FragmentActivity activity) {
-        }
-
-        @Override
-        protected ArrayList<Eat>  doInBackground(String... params) {
-            ArrayList<Eat> eatList = new ArrayList<>();
-
-            String account = params[0];
-
-            if (con == null) {
-                // 数据库连接失败
-                return eatList; // 返回空的ArrayList
-            } else {
-                try {
-                    String query1 = "SELECT * FROM eat WHERE user_id = ? ";
-                    PreparedStatement preparedStatement1 = con.prepareStatement(query1);
-                    preparedStatement1.setString(1, account);
-                    ResultSet resultSet1 = preparedStatement1.executeQuery();
-
-                    while (resultSet1.next()) {
-                        // 从结果集中获取数据
-                        String eatId = resultSet1.getString("eat_id");
-                        String userId = resultSet1.getString("user_id");
-                        String eatName = resultSet1.getString("eat_name");
-                        Integer eatGoal = resultSet1.getInt("goal");
-                        Integer eatDone = resultSet1.getInt("done");
-                        String eatcolor = resultSet1.getString("color");
-                        // 其他字段也可以类似获取
-
-                        // 创建User对象并添加到ArrayList中
-                        Eat eat = new Eat(userId, eatId, eatName, eatGoal, eatDone, eatcolor);
-
-
-                        // 设置其他字段
-
-                        eatList.add(eat);
-                    }
-
-
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    try {
-                        // 关闭连接
-                        if (con != null && !con.isClosed()) {
-                            con.close();
-                        }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                return eatList;
-            }
-        }
-
-
-
-        @Override
-        protected void onPostExecute(ArrayList<Eat> eatList) {
-            if (!eatList.isEmpty()) {
-                // 日常資料取出成功
-                //Toast.makeText(login_page.this, "登入成功", Toast.LENGTH_SHORT).show();
-                System.err.println("tt gogo");
-
-
-                for (Eat eat : eatList) {
-                    System.out.println("User ID: " + eat.getUserId());
-                    System.out.println("Eat Id: " + eat.getEat_id());
-                    System.out.println("Eat Name: " + eat.getEat_name());
-                    System.out.println("Goal: " + eat.getEat_goal());
-                    System.out.println("Done: " + eat.getEat_done());
-                    System.out.println("Color: " + eat.getEat_color());
-                    // 打印其他字段
-                }
-
-                // 在这里动态添加GifImageView
-                int gifCount = eatList.size();
-                System.out.println(gifCount);
-
-                // 動態添加GifImageView到RelativeLayout
-                RelativeLayout relativeLayout = view.findViewById(R.id.linearLayout);
-                for (int i = 0; i < gifCount; i++) {
-                    GifImageView gifImageView = new GifImageView(requireContext());
-                    // 設定GifImageView的圖片、寬度、高度以及隨機位置
-                    gifImageView.setImageResource(R.drawable.black_white_fish); // 替換為你的Gif圖片資源
-                    int width = ViewGroup.LayoutParams.MATCH_PARENT;
-                    int height = 300;
-                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, height);
-                    params.leftMargin = (int) (Math.random() * 800); // 隨機X坐標
-                    params.topMargin =  (int) (Math.random() * 1500); // 隨機Y坐標
-                    gifImageView.setLayoutParams(params);
-                    // 將GifImageView添加到RelativeLayout
-                    relativeLayout.addView(gifImageView);
-                }
-
-                System.out.println(eatList.size());
-                //HomeFragment.this.dailyList = eatList;
-                //System.out.println(HomeFragment.this.dailyList.size());
-
-
-
-                // 创建Intent对象
-                //Intent intent = new Intent(login_page.this, MainActivity.class);
-
-                // 将ArrayList<Daily>放入Intent中
-                //intent.putParcelableArrayListExtra("dailyList", (ArrayList<? extends Parcelable>) dailyList);
-
-                //啟動主畫面act
-                //startActivity(intent);
-            } else {
-                // 取出失敗
-                System.err.println("tt nono");
-            }
-        }
-    }
-
-    //Health data
-    private class OutputHealthTask extends AsyncTask<String, Void, ArrayList<Health>> {
-
-
-        public OutputHealthTask(FragmentActivity activity) {
-        }
-
-        @Override
-        protected ArrayList<Health>  doInBackground(String... params) {
-            ArrayList<Health> healthList = new ArrayList<>();
-
-            String account = params[0];
-
-            if (con == null) {
-                // 数据库连接失败
-                return healthList; // 返回空的ArrayList
-            } else {
-                try {
-                    String query1 = "SELECT * FROM health WHERE user_id = ? ";
-                    PreparedStatement preparedStatement1 = con.prepareStatement(query1);
-                    preparedStatement1.setString(1, account);
-                    ResultSet resultSet1 = preparedStatement1.executeQuery();
-
-                    while (resultSet1.next()) {
-                        // 从结果集中获取数据
-                        String healthId = resultSet1.getString("health_id");
-                        String userId = resultSet1.getString("user_id");
-                        String healthName = resultSet1.getString("health_name");
-                        Integer healthGoal = resultSet1.getInt("goal");
-                        Integer healthDone = resultSet1.getInt("done");
-                        String healthcolor = resultSet1.getString("color");
-                        // 其他字段也可以类似获取
-
-                        // 创建User对象并添加到ArrayList中
-                        Health health = new Health(userId, healthId, healthName, healthGoal, healthDone, healthcolor);
-
-
-                        // 设置其他字段
-
-                        healthList.add(health);
-                    }
-
-
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    try {
-                        // 关闭连接
-                        if (con != null && !con.isClosed()) {
-                            con.close();
-                        }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                return healthList;
-            }
-        }
-
-
-
-        @Override
-        protected void onPostExecute(ArrayList<Health> healthList) {
-            if (!healthList.isEmpty()) {
-                // 日常資料取出成功
-                //Toast.makeText(login_page.this, "登入成功", Toast.LENGTH_SHORT).show();
-                System.err.println("pp gogo");
-
-
-                for (Health health : healthList) {
-                    System.out.println("User ID: " + health.getUserId());
-                    System.out.println("Health Id: " + health.getHealth_id());
-                    System.out.println("Health Name: " + health.getHealth_name());
-                    System.out.println("Goal: " + health.getHealth_goal());
-                    System.out.println("Done: " + health.getHealth_done());
-                    System.out.println("Color: " + health.getHealth_color());
-                    // 打印其他字段
-                }
-
-                // 在这里动态添加GifImageView
-                int gifCount = healthList.size();
-                System.out.println(gifCount);
-
-                // 動態添加GifImageView到RelativeLayout
-                RelativeLayout relativeLayout = view.findViewById(R.id.linearLayout);
-                for (int i = 0; i < gifCount; i++) {
-                    GifImageView gifImageView = new GifImageView(requireContext());
-                    // 設定GifImageView的圖片、寬度、高度以及隨機位置
-                    gifImageView.setImageResource(R.drawable.blue_fish); // 替換為你的Gif圖片資源
-                    int width = ViewGroup.LayoutParams.MATCH_PARENT;
-                    int height = 300;
-                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, height);
-                    params.leftMargin = (int) (Math.random() * 800); // 隨機X坐標
-                    params.topMargin =  (int) (Math.random() * 1500); // 隨機Y坐標
-                    gifImageView.setLayoutParams(params);
-                    // 將GifImageView添加到RelativeLayout
-                    relativeLayout.addView(gifImageView);
-                }
-
-                System.out.println(healthList.size());
-                //HomeFragment.this.dailyList = eatList;
-                //System.out.println(HomeFragment.this.dailyList.size());
-
-
-
-                // 创建Intent对象
-                //Intent intent = new Intent(login_page.this, MainActivity.class);
-
-                // 将ArrayList<Daily>放入Intent中
-                //intent.putParcelableArrayListExtra("dailyList", (ArrayList<? extends Parcelable>) dailyList);
-
-                //啟動主畫面act
-                //startActivity(intent);
-            } else {
-                // 取出失敗
-                System.err.println("pp nono");
-            }
-        }
-    }
     private String readJsonFromFile(String fileName) {
         String json = "";
         try (InputStream inputStream = getActivity().openFileInput(fileName);
@@ -622,6 +287,30 @@ public class HomeFragment extends Fragment {
     private ArrayList<Daily> parseJsonToDailyList(String json) {
         Gson gson = new Gson();
         Type listType = new TypeToken<ArrayList<Daily>>() {}.getType();
+        return gson.fromJson(json, listType);
+    }
+
+    private ArrayList<Eat> parseJsonToEatList(String json) {
+        Gson gson = new Gson();
+        Type listType = new TypeToken<ArrayList<Eat>>() {}.getType();
+        return gson.fromJson(json, listType);
+    }
+
+    private ArrayList<Health> parseJsonToHealthList(String json) {
+        Gson gson = new Gson();
+        Type listType = new TypeToken<ArrayList<Health>>() {}.getType();
+        return gson.fromJson(json, listType);
+    }
+
+    private ArrayList<Type1> parseJsonToType1List(String json) {
+        Gson gson = new Gson();
+        Type listType = new TypeToken<ArrayList<Type1>>() {}.getType();
+        return gson.fromJson(json, listType);
+    }
+
+    private ArrayList<Type2> parseJsonToType2List(String json) {
+        Gson gson = new Gson();
+        Type listType = new TypeToken<ArrayList<Type2>>() {}.getType();
         return gson.fromJson(json, listType);
     }
 }

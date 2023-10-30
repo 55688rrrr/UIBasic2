@@ -1,15 +1,17 @@
 package com.example.uibasic;
 
+import java.util.Date;
+
 public class Type1 {
 
     private String userId;
     private String type1_id;
     private String type1_name;
-    private Integer type1_deadline;
+    private String type1_deadline;
     private Integer type1_done;
     private String type1_color;
 
-    public Type1(String userId, String type1_id, String type1_name, Integer type1_deadline, Integer type1_done, String type1_color){
+    public Type1(String userId, String type1_id, String type1_name, String type1_deadline, Integer type1_done, String type1_color){
 
         this.userId=userId;
         this.type1_id=type1_id;
@@ -31,7 +33,7 @@ public class Type1 {
         this.type1_name = type1_name;
     }
 
-    public void setType1_goal(Integer type1_deadline) {
+    public void setType1_deadline(String type1_deadline) {
         this.type1_deadline = type1_deadline;
     }
 
@@ -55,7 +57,7 @@ public class Type1 {
         return type1_name;
     }
 
-    public Integer getType1_goal() {
+    public String getType1_deadline() {
         return type1_deadline;
     }
 

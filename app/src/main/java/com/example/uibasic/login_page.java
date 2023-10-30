@@ -33,7 +33,10 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import pl.droidsonroids.gif.GifImageView;
 
@@ -41,6 +44,8 @@ import pl.droidsonroids.gif.GifImageView;
 public class login_page extends AppCompatActivity {
 
     private Connection con;
+
+    private String BiguserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -190,26 +195,12 @@ public class login_page extends AppCompatActivity {
                 System.out.println("User ID: " + userId);
                 System.out.println("User Name: " + userName);
 
+                BiguserId=userId;
+                System.out.println("User Nameaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: " + BiguserId);
 
-                // 通过SharedViewModel将用户数据传递给其他组件
-                //sharedViewModel = ViewModelProvider(getActivity()).get(SharedViewModel.class);
-                //sharedViewModel.setUser(user);
 
                 new OutputDailyTask().execute(userId);
 
-                //創建intent對象
-                /*Intent intent = new Intent(login_page.this, MainActivity.class);
-                intent.putExtra("USER_ID", userId);
-                intent.putExtra("USER_NAME", userName);*/
-
-                // 創建一個 Intent 來跳轉到 UserDataActivity
-                /*Intent intent = new Intent(login_page.this, UserDataActivity.class);
-                intent.putExtra("USER_ID", userId);
-                intent.putExtra("USER_NAME", userName);*/
-
-
-                //啟動主畫面act
-                //startActivity(intent);
 
 
             } else {
@@ -230,11 +221,6 @@ public class login_page extends AppCompatActivity {
     private class OutputDailyTask extends AsyncTask<String, Void, ArrayList<Daily>> {
 
 
-        //private String userId;
-
-        /*public OutputDailyTask(String userId) {
-            this.userId = userId;
-        }*/
 
         @Override
         protected ArrayList<Daily>  doInBackground(String... params) {
@@ -281,7 +267,7 @@ public class login_page extends AppCompatActivity {
                     try {
                         // 先不要關閉連結
                         if (con != null && !con.isClosed()) {
-                            con.close();
+                            //con.close();
                         }
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -298,19 +284,7 @@ public class login_page extends AppCompatActivity {
         protected void onPostExecute(ArrayList<Daily> dailyList) {
             if (!dailyList.isEmpty()) {
                 // 日常資料取出成功
-                //Toast.makeText(login_page.this, "登入成功", Toast.LENGTH_SHORT).show();
                 System.err.println("dd gogo");
-
-
-                for (Daily daily : dailyList) {
-                    System.out.println("User ID: " + daily.getUserId());
-                    System.out.println("Daily Id: " + daily.getDaily_id());
-                    System.out.println("Daily Name: " + daily.getDaily_name());
-                    System.out.println("Goal: " + daily.getDaily_goal());
-                    System.out.println("Done: " + daily.getDaily_done());
-                    System.out.println("Color: " + daily.getDaily_color());
-                    // 打印其他字段
-                }
 
 
                 // 執行 AsyncTask
@@ -324,14 +298,51 @@ public class login_page extends AppCompatActivity {
         }
     }
 
+    //daily save
+    private class SaveDataToFileTask extends AsyncTask<ArrayList<Daily>, Void, Void> {
 
+
+        @Override
+        protected Void doInBackground(ArrayList<Daily>... params) {
+            // 取得傳入的資料
+            ArrayList<Daily> dailyList = params[0];
+
+            // 將資料轉換為 JSON 字串
+            Gson gson = new Gson();
+            //String jsonUser = gson.toJson(user); // 假設你的 User 物件是 user
+            String jsonDailyList = gson.toJson(dailyList);
+
+            // 將 JSON 字串儲存到檔案中
+            //saveJsonToFile("user_data.json", jsonUser);
+            saveJsonToFile("daily_data.json", jsonDailyList);
+
+            return null;
+        }
+
+        private void saveJsonToFile(String fileName, String json) {
+            try (FileOutputStream fileOutputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
+                 OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream)) {
+                // 寫入 JSON 字串到檔案中
+                outputStreamWriter.write(json);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            // 在執行完儲存任務後，你可以在這裡執行任何後續操作，例如切換到下一個畫面
+            System.err.println("成功");
+
+            new OutputEatTask().execute(BiguserId);
+
+        }
+    }
 
     //Eat data
-    /*private class OutputEatTask extends AsyncTask<String, Void, ArrayList<Eat>> {
+    private class OutputEatTask extends AsyncTask<String, Void, ArrayList<Eat>> {
 
 
-        public OutputEatTask(FragmentActivity activity) {
-        }
 
         @Override
         protected ArrayList<Eat>  doInBackground(String... params) {
@@ -376,7 +387,7 @@ public class login_page extends AppCompatActivity {
                     try {
                         // 关闭连接
                         if (con != null && !con.isClosed()) {
-                            con.close();
+                            //con.close();
                         }
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -396,54 +407,406 @@ public class login_page extends AppCompatActivity {
                 //Toast.makeText(login_page.this, "登入成功", Toast.LENGTH_SHORT).show();
                 System.err.println("tt gogo");
 
-
-                for (Eat eat : eatList) {
-                    System.out.println("User ID: " + eat.getUserId());
-                    System.out.println("Eat Id: " + eat.getEat_id());
-                    System.out.println("Eat Name: " + eat.getEat_name());
-                    System.out.println("Goal: " + eat.getEat_goal());
-                    System.out.println("Done: " + eat.getEat_done());
-                    System.out.println("Color: " + eat.getEat_color());
-                    // 打印其他字段
-                }
-
-                System.out.println(eatList.size());
-                //HomeFragment.this.dailyList = eatList;
-                //System.out.println(HomeFragment.this.dailyList.size());
+                // 執行 AsyncTask
+                new SaveEatDataToFileTask().execute(eatList);
 
 
-
-                // 创建Intent对象
-                //Intent intent = new Intent(login_page.this, MainActivity.class);
-
-                // 将ArrayList<Daily>放入Intent中
-                //intent.putParcelableArrayListExtra("dailyList", (ArrayList<? extends Parcelable>) dailyList);
-
-                //啟動主畫面act
-                //startActivity(intent);
             } else {
                 // 取出失敗
                 System.err.println("tt nono");
             }
         }
-    }*/
+    }
 
-    private class SaveDataToFileTask extends AsyncTask<ArrayList<Daily>, Void, Void> {
+    //Eat save
+    private class SaveEatDataToFileTask extends AsyncTask<ArrayList<Eat>, Void, Void> {
 
 
         @Override
-        protected Void doInBackground(ArrayList<Daily>... params) {
+        protected Void doInBackground(ArrayList<Eat>... params) {
             // 取得傳入的資料
-            ArrayList<Daily> dailyList = params[0];
+            ArrayList<Eat> eatList = params[0];
 
             // 將資料轉換為 JSON 字串
             Gson gson = new Gson();
             //String jsonUser = gson.toJson(user); // 假設你的 User 物件是 user
-            String jsonDailyList = gson.toJson(dailyList);
+            String jsonEatList = gson.toJson(eatList);
 
             // 將 JSON 字串儲存到檔案中
             //saveJsonToFile("user_data.json", jsonUser);
-            saveJsonToFile("daily_data.json", jsonDailyList);
+            saveJsonToFile("eat_data.json", jsonEatList);
+
+            return null;
+        }
+
+        private void saveJsonToFile(String fileName, String json) {
+            try (FileOutputStream fileOutputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
+                 OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream)) {
+                // 寫入 JSON 字串到檔案中
+                outputStreamWriter.write(json);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            // 在執行完儲存任務後，你可以在這裡執行任何後續操作，例如切換到下一個畫面
+            // 顯示 Toast 訊息來確認資料是否成功儲存
+            System.err.println("Eat成功");
+
+            new OutputHealthTask().execute(BiguserId);
+
+        }
+    }
+
+    //Health data
+    private class OutputHealthTask extends AsyncTask<String, Void, ArrayList<Health>> {
+
+
+        @Override
+        protected ArrayList<Health>  doInBackground(String... params) {
+            ArrayList<Health> healthList = new ArrayList<>();
+
+            String account = params[0];
+
+            if (con == null) {
+                // 数据库连接失败
+                return healthList; // 返回空的ArrayList
+            } else {
+                try {
+                    String query1 = "SELECT * FROM health WHERE user_id = ? ";
+                    PreparedStatement preparedStatement1 = con.prepareStatement(query1);
+                    preparedStatement1.setString(1, account);
+                    ResultSet resultSet1 = preparedStatement1.executeQuery();
+
+                    while (resultSet1.next()) {
+                        // 从结果集中获取数据
+                        String healthId = resultSet1.getString("health_id");
+                        String userId = resultSet1.getString("user_id");
+                        String healthName = resultSet1.getString("health_name");
+                        Integer healthGoal = resultSet1.getInt("goal");
+                        Integer healthDone = resultSet1.getInt("done");
+                        String healthcolor = resultSet1.getString("color");
+                        // 其他字段也可以类似获取
+
+                        // 创建User对象并添加到ArrayList中
+                        Health health = new Health(userId, healthId, healthName, healthGoal, healthDone, healthcolor);
+
+
+                        // 设置其他字段
+
+                        healthList.add(health);
+                    }
+
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        // 关闭连接
+                        if (con != null && !con.isClosed()) {
+                            //con.close();
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                return healthList;
+            }
+        }
+
+
+
+        @Override
+        protected void onPostExecute(ArrayList<Health> healthList) {
+            if (!healthList.isEmpty()) {
+                // 日常資料取出成功
+                System.err.println("pp gogo");
+
+                new SaveHealthDataToFileTask().execute(healthList);
+
+
+            } else {
+                // 取出失敗
+                System.err.println("pp nono");
+            }
+        }
+    }
+
+    //Health save
+    private class SaveHealthDataToFileTask extends AsyncTask<ArrayList<Health>, Void, Void> {
+
+
+        @Override
+        protected Void doInBackground(ArrayList<Health>... params) {
+            // 取得傳入的資料
+            ArrayList<Health> healthList = params[0];
+
+            // 將資料轉換為 JSON 字串
+            Gson gson = new Gson();
+            //String jsonUser = gson.toJson(user); // 假設你的 User 物件是 user
+            String jsonHealthList = gson.toJson(healthList);
+
+            // 將 JSON 字串儲存到檔案中
+            //saveJsonToFile("user_data.json", jsonUser);
+            saveJsonToFile("health_data.json", jsonHealthList);
+
+            return null;
+        }
+
+        private void saveJsonToFile(String fileName, String json) {
+            try (FileOutputStream fileOutputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
+                 OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream)) {
+                // 寫入 JSON 字串到檔案中
+                outputStreamWriter.write(json);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            // 在執行完儲存任務後，你可以在這裡執行任何後續操作，例如切換到下一個畫面
+            // 顯示 Toast 訊息來確認資料是否成功儲存
+
+            System.err.println("Heath成功");
+
+
+            new OutputType1Task().execute(BiguserId);
+
+        }
+    }
+
+    //Type1 data
+    private class OutputType1Task extends AsyncTask<String, Void, ArrayList<Type1>> {
+
+
+
+        @Override
+        protected ArrayList<Type1>  doInBackground(String... params) {
+            ArrayList<Type1> type1List = new ArrayList<>();
+
+            String account = params[0];
+
+            if (con == null) {
+                // 数据库连接失败
+                return type1List; // 返回空的ArrayList
+            } else {
+                try {
+                    String query1 = "SELECT * FROM type1 WHERE user_id = ? ";
+                    PreparedStatement preparedStatement1 = con.prepareStatement(query1);
+                    preparedStatement1.setString(1, account);
+                    ResultSet resultSet1 = preparedStatement1.executeQuery();
+
+                    while (resultSet1.next()) {
+                        // 从结果集中获取数据
+                        String type1Id = resultSet1.getString("type1_id");
+                        String userId = resultSet1.getString("user_id");
+                        String type1Name = resultSet1.getString("type1_name");
+                        Date type1date = resultSet1.getDate("deadline");
+                        Integer type1Done = resultSet1.getInt("done");
+                        String type1color = resultSet1.getString("color");
+                        // 其他字段也可以类似获取
+
+                        // 将Date对象转换为特定格式的字符串
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                        String formattedDate = dateFormat.format(type1date);
+
+                        // 创建User对象并添加到ArrayList中
+                        Type1 type1 = new Type1(userId, type1Id, type1Name, formattedDate, type1Done, type1color);
+
+
+                        // 设置其他字段
+
+                        type1List.add(type1);
+                    }
+
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+
+                        if (con != null && !con.isClosed()) {
+                            //con.close();
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                return type1List;
+            }
+        }
+
+
+
+        @Override
+        protected void onPostExecute(ArrayList<Type1> type1List) {
+            if (!type1List.isEmpty()) {
+                // 日常資料取出成功
+
+                // 執行 AsyncTask
+                new SaveType1DataToFileTask().execute(type1List);
+
+            } else {
+                // 取出失敗
+                System.err.println("tt nono");
+            }
+        }
+    }
+
+    //Type1 save
+    private class SaveType1DataToFileTask extends AsyncTask<ArrayList<Type1>, Void, Void> {
+
+
+        @Override
+        protected Void doInBackground(ArrayList<Type1>... params) {
+            // 取得傳入的資料
+            ArrayList<Type1> type1List = params[0];
+
+            // 將資料轉換為 JSON 字串
+            Gson gson = new Gson();
+            //String jsonUser = gson.toJson(user); // 假設你的 User 物件是 user
+            String jsonType1List = gson.toJson(type1List);
+
+            // 將 JSON 字串儲存到檔案中
+            //saveJsonToFile("user_data.json", jsonUser);
+            saveJsonToFile("type1_data.json", jsonType1List);
+
+            return null;
+        }
+
+        private void saveJsonToFile(String fileName, String json) {
+            try (FileOutputStream fileOutputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
+                 OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream)) {
+                // 寫入 JSON 字串到檔案中
+                outputStreamWriter.write(json);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            // 在執行完儲存任務後，你可以在這裡執行任何後續操作，例如切換到下一個畫面
+            // 顯示 Toast 訊息來確認資料是否成功儲存
+
+            System.err.println("Type1成功");
+
+            new OutputType2Task().execute(BiguserId);
+
+        }
+    }
+
+    //Type2 data
+    private class OutputType2Task extends AsyncTask<String, Void, ArrayList<Type2>> {
+
+
+        @Override
+        protected ArrayList<Type2>  doInBackground(String... params) {
+            ArrayList<Type2> type2List = new ArrayList<>();
+
+            String account = params[0];
+
+            if (con == null) {
+                // 数据库连接失败
+                return type2List; // 返回空的ArrayList
+            } else {
+                try {
+                    String query1 = "SELECT * FROM type2 WHERE user_id = ? ";
+                    PreparedStatement preparedStatement1 = con.prepareStatement(query1);
+                    preparedStatement1.setString(1, account);
+                    ResultSet resultSet1 = preparedStatement1.executeQuery();
+
+                    while (resultSet1.next()) {
+                        // 从结果集中获取数据
+                        String type2Id = resultSet1.getString("type2_id");
+                        String userId = resultSet1.getString("user_id");
+                        String type2Name = resultSet1.getString("type2_name");
+                        Integer type2Goal = resultSet1.getInt("goal");
+                        Integer type2Done = resultSet1.getInt("done");
+                        String type2color = resultSet1.getString("color");
+                        // 其他字段也可以类似获取
+
+                        // 创建User对象并添加到ArrayList中
+                        Type2 type2 = new Type2(userId, type2Id, type2Name, type2Goal, type2Done, type2color);
+
+
+                        // 设置其他字段
+
+                        type2List.add(type2);
+                    }
+
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        // 关闭连接
+                        if (con != null && !con.isClosed()) {
+                            con.close();
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                return type2List;
+            }
+        }
+
+
+
+        @Override
+        protected void onPostExecute(ArrayList<Type2> type2List) {
+            if (!type2List.isEmpty()) {
+                // 日常資料取出成功
+                //Toast.makeText(login_page.this, "登入成功", Toast.LENGTH_SHORT).show();
+                System.err.println("22 gogo");
+
+
+                for (Type2 type2 : type2List) {
+                    System.out.println("User ID: " + type2.getUserId());
+                    System.out.println("Type2 Id: " + type2.getType2_id());
+                    System.out.println("Type2 Name: " + type2.getType2_name());
+                    System.out.println("Goal: " + type2.getType2_goal());
+                    System.out.println("Done: " + type2.getType2_done());
+                    System.out.println("Color: " + type2.getDaily_color());
+                    // 打印其他字段
+                }
+                new SaveType2DataToFileTask().execute(type2List);
+
+
+            } else {
+                // 取出失敗
+                System.err.println("22 nono");
+            }
+        }
+    }
+
+    //Type2 save
+    private class SaveType2DataToFileTask extends AsyncTask<ArrayList<Type2>, Void, Void> {
+
+
+        @Override
+        protected Void doInBackground(ArrayList<Type2>... params) {
+            // 取得傳入的資料
+            ArrayList<Type2> type2List = params[0];
+
+            // 將資料轉換為 JSON 字串
+            Gson gson = new Gson();
+            //String jsonUser = gson.toJson(user); // 假設你的 User 物件是 user
+            String jsonType2List = gson.toJson(type2List);
+
+            // 將 JSON 字串儲存到檔案中
+            //saveJsonToFile("user_data.json", jsonUser);
+            saveJsonToFile("type2_data.json", jsonType2List);
 
             return null;
         }
@@ -463,7 +826,8 @@ public class login_page extends AppCompatActivity {
             // 在執行完儲存任務後，你可以在這裡執行任何後續操作，例如切換到下一個畫面
             // 顯示 Toast 訊息來確認資料是否成功儲存
             //Toast.makeText(getApplicationContext(), "資料儲存成功", Toast.LENGTH_SHORT).show();
-            System.err.println("成功");
+            System.err.println("Type2成功");
+
             // 跳轉到主畫面
             // 创建启动新活动的 Intent 对象
             Intent intent = new Intent(login_page.this, MainActivity.class);
@@ -472,75 +836,5 @@ public class login_page extends AppCompatActivity {
         }
     }
 
-        /*
-        private class OutputDatabaseTask extends AsyncTask<String, Void, Boolean> {
-            @Override
-            protected Boolean doInBackground(String... params) {
-                String account = params[0];
-                String pass = params[1];
-                String data="";
-
-                if (con == null) {
-                    // 数据库连接失败
-                    return false;
-                } else {
-                    try {
-                        String query = "SELECT * FROM user WHERE user_id = ? AND user_pass = ?";
-                        PreparedStatement preparedStatement = con.prepareStatement(query);
-                        preparedStatement.setString(1, account);
-                        preparedStatement.setString(2, pass);
-                        ResultSet resultSet = preparedStatement.executeQuery(query);
-
-                        // 如果结果集不为空，说明登录成功
-                        //System.err.println(resultSet.next());
-                            // 从结果集中获取数据
-                        while(resultSet.next())
-                        {
-                            String userId = resultSet.getString("user_id");
-                            String userPass = resultSet.getString("user_pass");
-                            String userGmail = resultSet.getString("user_gmail");
-                            String userName = resultSet.getString("user_name");
-                            data+= userId+","+userGmail+","+userName+"\n";
-                        }
-
-                        System.out.println(data);
-
-                        return resultSet.next();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        return false; // 数据库操作失败
-                    } finally {
-                        try {
-
-                            // 关闭连接
-                            if (con != null && !con.isClosed()) {
-                                con.close();
-                            }
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-         */
-
-    //login = findViewById(R.id.LoginButton);
-    //register = findViewById(R.id.RegisterButton);
-
-    //login.setOnClickListener(new View.OnClickListener() {
-    //@Override
-    //public void onClick(View v) {
-    //Intent intent = new Intent(login_page.this,MainActivity.class);
-    //startActivity(intent);
-    //}
-    //});
-
-    //register.setOnClickListener(new View.OnClickListener() {
-    //@Override
-    //public void onClick(View v) {
-    //Intent intent = new Intent(login_page.this,register_page.class);
-    //startActivity(intent);
-    //}
-    //});
 
 }
