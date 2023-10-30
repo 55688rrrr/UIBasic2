@@ -9,6 +9,16 @@ public class Eat {
     private Integer eat_done;
     private String eat_color;
 
+    public Eat(String userId, String eat_id, String eat_name, Integer eat_goal, Integer eat_done, String eat_color){
+
+        this.userId=userId;
+        this.eat_id=eat_id;
+        this.eat_name=eat_name;
+        this.eat_goal=eat_goal;
+        this.eat_done=eat_done;
+        this.eat_color=eat_color;
+    }
+
     public void setUserId(String userId) {
         this.userId = userId;
     }

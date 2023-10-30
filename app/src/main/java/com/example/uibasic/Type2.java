@@ -9,6 +9,16 @@ public class Type2 {
     private Integer type2_done;
     private String type2_color;
 
+    public Type2(String userId, String type2_id, String type2_name, Integer type2_goal, Integer type2_done, String type2_color){
+
+        this.userId=userId;
+        this.type2_id=type2_id;
+        this.type2_name=type2_name;
+        this.type2_goal=type2_goal;
+        this.type2_done=type2_done;
+        this.type2_color=type2_color;
+    }
+
     public void setUserId(String userId) {
         this.userId = userId;
     }

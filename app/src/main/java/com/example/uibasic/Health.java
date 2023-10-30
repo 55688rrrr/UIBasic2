@@ -9,6 +9,16 @@ public class Health {
     private Integer health_done;
     private String health_color;
 
+    public Health(String userId, String health_id, String health_name, Integer health_goal, Integer health_done, String health_color){
+
+        this.userId=userId;
+        this.health_id=health_id;
+        this.health_name=health_name;
+        this.health_goal=health_goal;
+        this.health_done=health_done;
+        this.health_color=health_color;
+    }
+
     public void setUserId(String userId) {
         this.userId = userId;
     }

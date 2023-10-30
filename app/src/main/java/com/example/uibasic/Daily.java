@@ -8,6 +8,16 @@ public class Daily {
     private Integer daily_done;
     private String daily_color;
 
+    public Daily(String userId, String daily_id, String daily_name, Integer daily_goal, Integer daily_done, String daily_color){
+
+        this.userId=userId;
+        this.daily_id=daily_id;
+        this.daily_name=daily_name;
+        this.daily_goal=daily_goal;
+        this.daily_done=daily_done;
+        this.daily_color=daily_color;
+    }
+
     public void setUserId(String userId) {
         this.userId = userId;
     }
