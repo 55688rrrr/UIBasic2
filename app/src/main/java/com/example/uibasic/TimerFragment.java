@@ -12,7 +12,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class TimerFragment extends Fragment {
-
     private ProgressBar progressBar;
     private TextView progressText;
     int i = 0;

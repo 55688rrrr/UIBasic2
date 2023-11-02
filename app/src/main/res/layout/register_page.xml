@@ -36,18 +36,9 @@
         android:layout_marginTop="430dp"
         android:layout_marginEnd="135dp"
         android:layout_marginBottom="280dp"
-        android:text="取消"
+        android:text="取消註冊"
         android:textSize="18sp"
         android:background="@color/itemBlue" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="160dp"
-        android:text="姓名："
-        android:textColor="@android:color/black"
-        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/NameInput"
@@ -63,16 +54,7 @@
         android:layout_marginBottom="540dp"
         android:ems="10"
         android:inputType="text"
-        android:text=""
-        android:textSize="18sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="210dp"
-        android:text="帳號："
-        android:textColor="@android:color/black"
+        android:hint="姓名"
         android:textSize="18sp" />
 
     <EditText
@@ -89,16 +71,7 @@
         android:layout_marginBottom="490dp"
         android:ems="10"
         android:inputType="text"
-        android:text=""
-        android:textSize="18sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="260dp"
-        android:text="密碼："
-        android:textColor="@android:color/black"
+        android:hint="帳號"
         android:textSize="18sp" />
 
     <EditText
@@ -114,8 +87,8 @@
         android:layout_marginEnd="80dp"
         android:layout_marginBottom="440dp"
         android:ems="10"
-        android:inputType="text"
-        android:text=""
+        android:inputType="textPassword"
+        android:hint="密碼"
         android:textSize="18sp" />
 
 </RelativeLayout>
