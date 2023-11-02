@@ -15,25 +15,18 @@
         android:theme="@style/Theme.Aquarium"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity3"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:exported="true" >
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-        </activity>
-            <!-- 1025 android:exported 改成true試試看 -->
-            <!-- 1025 但是加上intent-filter那串好像就當掉ㄌ？？？:( -->
-        <activity
             android:name=".register_page"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:exported="true" />
         <activity
             android:name=".login_page"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:exported="false" />
+            android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
@@ -47,6 +40,18 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity
+            android:name=".MainActivity3"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:exported="true" >
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
+
+            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--            </intent-filter>-->
+        </activity>
+            <!-- 1025 android:exported 改成true試試看 -->
+            <!-- 1025 但是加上intent-filter那串好像就當掉ㄌ？？？:( -->
     </application>
 
 </manifest>
