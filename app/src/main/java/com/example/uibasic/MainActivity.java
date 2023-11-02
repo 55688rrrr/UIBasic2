@@ -6,6 +6,8 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -31,8 +33,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 R.string.close_nav);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
         if (savedInstanceState == null) {
+            // 獲取從Intent中傳遞的用戶數據
+            Intent intent = getIntent();
+            String userId = intent.getStringExtra("USER_ID");
+            String userName = intent.getStringExtra("USER_NAME");
+
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+
+            User user = new User(userId, userName);
+            // 調用HomeFragment的updateUserData方法將用戶數據傳遞進去
+            //HomeFragment.updateUserData(new User(userId, userName));
+
             navigationView.setCheckedItem(R.id.nav_home);
         }
     }

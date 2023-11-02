@@ -47,9 +47,9 @@ public class MainActivity3 extends AppCompatActivity {
                 //setContentView(R.layout.activity_main);
                 //❗️可是著畫面右邊那個按鈕只能按一次？！左邊那個也沒用了:(
 
-                GifImageView blue_fish_0 = findViewById(R.id.blue_fish_0);
+                //GifImageView blue_fish_0 = findViewById(R.id.blue_fish_0);
                 //1025
-                blue_fish_0.setX((int)(Math.random()*1000));
+                /*blue_fish_0.setX((int)(Math.random()*1000));
                 blue_fish_0.setY((int)(Math.random()*2000));
 
                 try {
@@ -60,7 +60,7 @@ public class MainActivity3 extends AppCompatActivity {
 //                        bfList_Adapter.add(blueFish0);
                 } catch (Exception e) {
                     e.printStackTrace();
-                }
+                }*/
 
                 Intent intent = new Intent(MainActivity3.this, MainActivity.class);
                 startActivity(intent);

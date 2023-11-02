@@ -37,9 +37,4 @@ public class sqlCon {
         return con;
     }
 
-
-
-
-
-
 }
