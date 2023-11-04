@@ -9,6 +9,7 @@
     tools:ignore="ExtraText">
 
     <include
+        android:id="@+id/include"
         layout="@layout/toolbar" />
 
     <!-- 1009 -->
@@ -34,6 +35,7 @@
             <!-- android:onClick="onAddItem" ？？ -->
 
     <!-- 1009 -->
+    <!--
     <ImageButton
         android:id="@+id/add_bwFish"
         android:visible="true"
@@ -50,17 +52,46 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/bw_pic" />
+        -->
             <!-- 1010 set visibility (第二行) -> 沒用？？☹️ -->
 
     <!-- 1009 試試看？？ -->
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/lvItems"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/btnAddItem"
-        tools:ignore="MissingConstraints" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="545dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="58dp">
+
+        <!-- DataType1 的 RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_data_daily"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- DataType2 的 RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_data_eat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- DataType3 的 RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_data_health"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- DataType4 的 RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_data_type1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- DataType5 的 RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_data_type2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

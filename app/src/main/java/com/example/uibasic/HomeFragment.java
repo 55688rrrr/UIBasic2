@@ -70,6 +70,7 @@ public class HomeFragment extends Fragment {
         // 解析 JSON 字串為 ArrayList<Daily> 物件
         ArrayList<Daily> dailyList = parseJsonToDailyList(jsonDailyData);
         System.out.println("jsonnnnnnnnnnnnn "+ dailyList.size());
+        System.out.println("jsonnnnnnnnnnnnn "+ dailyList.get(0).getDaily_id());
 
         // 讀取 JSON 檔案中的 eat 資料
         String jsonEatData = readJsonFromFile("eat_data.json");
