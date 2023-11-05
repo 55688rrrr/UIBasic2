@@ -10,10 +10,13 @@
 
     <include
         android:id="@+id/include"
-        layout="@layout/toolbar" />
+        layout="@layout/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <!-- 1009 -->
-    <ImageButton
+    <!--<ImageButton
         android:id="@+id/add_blueFish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,7 +24,7 @@
         android:contentDescription="TODO"
         app:srcCompat="@drawable/bf_pic"
         android:onClick="onClick"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints" />-->
         <!--
         android:layout_marginStart="100dp"
         android:layout_marginTop="300dp"
@@ -56,42 +59,17 @@
             <!-- 1010 set visibility (第二行) -> 沒用？？☹️ -->
 
     <!-- 1009 試試看？？ -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="545dp"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="58dp">
 
-        <!-- DataType1 的 RecyclerView -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_data_daily"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
-        <!-- DataType2 的 RecyclerView -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_data_eat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+    <!-- DataType1 的 RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_data_daily"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/include"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- DataType3 的 RecyclerView -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_data_health"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <!-- DataType4 的 RecyclerView -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_data_type1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <!-- DataType5 的 RecyclerView -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_data_type2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

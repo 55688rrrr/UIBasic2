@@ -1,5 +1,12 @@
 package com.example.uibasic;
 
+import static com.example.uibasic.JsonUtils.parseJsonToDailyList;
+import static com.example.uibasic.JsonUtils.parseJsonToEatList;
+import static com.example.uibasic.JsonUtils.parseJsonToHealthList;
+import static com.example.uibasic.JsonUtils.parseJsonToType1List;
+import static com.example.uibasic.JsonUtils.parseJsonToType2List;
+import static com.example.uibasic.JsonUtils.readJsonFromFile;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,40 +51,79 @@ public class MainActivity3 extends AppCompatActivity {
 
         //json
         // 讀取 JSON 檔案中的 daily 資料
-        String jsonDailyData = readJsonFromFile("daily_data.json");
+        String jsonDailyData = readJsonFromFile(this,"daily_data.json");
         // 解析 JSON 字串為 ArrayList<Daily> 物件
         ArrayList<Daily> dailyList = parseJsonToDailyList(jsonDailyData);
 
         // 讀取 JSON 檔案中的 eat 資料
-        String jsonEatData = readJsonFromFile("eat_data.json");
+        String jsonEatData = readJsonFromFile(this,"eat_data.json");
         // 解析 JSON 字串為 ArrayList<Eat> 物件
         ArrayList<Eat> eatList = parseJsonToEatList(jsonEatData);
 
         // 讀取 JSON 檔案中的 health 資料
-        String jsonHealthData = readJsonFromFile("health_data.json");
+        String jsonHealthData = readJsonFromFile(this,"health_data.json");
         // 解析 JSON 字串為 ArrayList<Health> 物件
         ArrayList<Health> healthList = parseJsonToHealthList(jsonHealthData);
 
         // 讀取 JSON 檔案中的 type1 資料
-        String jsonType1Data = readJsonFromFile("type1_data.json");
+        String jsonType1Data = readJsonFromFile(this,"type1_data.json");
         // 解析 JSON 字串為 ArrayList<Type1> 物件
         ArrayList<Type1> type1List = parseJsonToType1List(jsonType1Data);
 
         // 讀取 JSON 檔案中的 type2 資料
-        String jsonType2Data = readJsonFromFile("type2_data.json");
+        String jsonType2Data = readJsonFromFile(this,"type2_data.json");
         // 解析 JSON 字串為 ArrayList<Type2> 物件
         ArrayList<Type2> type2List = parseJsonToType2List(jsonType2Data);
+
+        ArrayList<Combine> combinedList = new ArrayList<>();
+
+        for(int i=0; i<dailyList.size();i++)
+        {
+            String itemFromList1 = dailyList.get(i).getDaily_name();
+            Integer itemFromList2 = 1;
+            combinedList.add(new Combine(itemFromList1,itemFromList2));
+        }
+
+        for(int i=0; i<eatList.size();i++)
+        {
+            String itemFromList1 = eatList.get(i).getEat_name();
+            Integer itemFromList2 = 2;
+            combinedList.add(new Combine(itemFromList1,itemFromList2));
+        }
+
+        for(int i=0; i<healthList.size();i++)
+        {
+            String itemFromList1 = healthList.get(i).getHealth_name();
+            Integer itemFromList2 = 3;
+            combinedList.add(new Combine(itemFromList1,itemFromList2));
+        }
+
+        for(int i=0; i<type1List.size();i++)
+        {
+            String itemFromList1 = type1List.get(i).getType1_name();
+            Integer itemFromList2 = 4;
+            combinedList.add(new Combine(itemFromList1,itemFromList2));
+        }
+
+        for(int i=0; i<type2List.size();i++)
+        {
+            String itemFromList1 = type2List.get(i).getType2_name();
+            Integer itemFromList2 = 5;
+            combinedList.add(new Combine(itemFromList1,itemFromList2));
+        }
+
+        System.out.println("SSSSSSSSSSSSSSSSSS "+ combinedList);
 
 
         // 初始化 RecyclerView 和 Adapter Daily
         RecyclerView recyclerView1 = findViewById(R.id.recycler_view_data_daily);
-        DataDailyAdapter adapter1 = new DataDailyAdapter(dailyList);
+        DataDailyAdapter adapter1 = new DataDailyAdapter(this,combinedList, dailyList, eatList, healthList, type1List, type2List);
         recyclerView1.setLayoutManager(new LinearLayoutManager(this));
         recyclerView1.setAdapter(adapter1);
-        System.out.println("reeeeeeeeeeeeeeeeeeeeeee "+ dailyList.get(0).getDaily_name());
+        System.out.println("reeeeeeeeeeeeeeeeeeeeeee "+ combinedList.get(0));
 
         // 初始化 RecyclerView 和 Adapter Eat
-        RecyclerView recyclerView2 = findViewById(R.id.recycler_view_data_eat);
+        /*RecyclerView recyclerView2 = findViewById(R.id.recycler_view_data_eat);
         DataEatAdapter adapter2 = new DataEatAdapter(eatList);
         recyclerView2.setLayoutManager(new LinearLayoutManager(this));
         recyclerView2.setAdapter(adapter2);
@@ -98,7 +144,7 @@ public class MainActivity3 extends AppCompatActivity {
         RecyclerView recyclerView5 = findViewById(R.id.recycler_view_data_type2);
         DataType2Adapter adapter5 = new DataType2Adapter(type2List);
         recyclerView5.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView5.setAdapter(adapter5);
+        recyclerView5.setAdapter(adapter5);*/
 
 //        //1009 試試看？？
 //        lvItems = (ListView) findViewById(R.id.lvItems);
@@ -107,37 +153,10 @@ public class MainActivity3 extends AppCompatActivity {
 //                android.R.layout.simple_list_item_1, bfList);
 //        lvItems.setAdapter(bfList_Adapter);
 
-        //1009
-        ImageButton add_blueFish = findViewById(R.id.add_blueFish);
-        add_blueFish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //1025 這樣可以回到主頁面＆加上魚：）
-                //setContentView(R.layout.activity_main);
-                //❗️可是著畫面右邊那個按鈕只能按一次？！左邊那個也沒用了:(
 
-                //GifImageView blue_fish_0 = findViewById(R.id.blue_fish_0);
-                //1025
-                /*blue_fish_0.setX((int)(Math.random()*1000));
-                blue_fish_0.setY((int)(Math.random()*2000));
-
-                try {
-                    GifDrawable blueFish0 = new GifDrawable(getResources(), R.drawable.blue_fish);
-                    blue_fish_0.setImageDrawable(blueFish0);
-//                        //1009 試試看？？
-//                        bfList.add(blueFish0);
-//                        bfList_Adapter.add(blueFish0);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }*/
-
-                Intent intent = new Intent(MainActivity3.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
-    private String readJsonFromFile(String fileName) {
+    /*private String readJsonFromFile(String fileName) {
         String json = "";
         try (InputStream inputStream = openFileInput(fileName);
              InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
@@ -182,7 +201,7 @@ public class MainActivity3 extends AppCompatActivity {
         Gson gson = new Gson();
         Type listType = new TypeToken<ArrayList<Type2>>() {}.getType();
         return gson.fromJson(json, listType);
-    }
+    }*/
 }
 
 
