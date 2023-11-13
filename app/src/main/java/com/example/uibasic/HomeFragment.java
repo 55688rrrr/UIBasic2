@@ -249,8 +249,10 @@ public class HomeFragment extends Fragment {
         mdbt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), login_page.class);
+                Intent intent = new Intent(getActivity(), MainActivity3.class);
                 startActivity(intent);
+                /*Intent intent = new Intent(getActivity(), login_page.class);
+                startActivity(intent);*/
             }
         });
 
@@ -258,8 +260,8 @@ public class HomeFragment extends Fragment {
         rtbt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MainActivity3.class);
-                startActivity(intent);
+                /*Intent intent = new Intent(getActivity(), MainActivity3.class);
+                startActivity(intent);*/
             }
         });
 
