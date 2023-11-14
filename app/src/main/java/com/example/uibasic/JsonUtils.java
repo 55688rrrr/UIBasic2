@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -73,5 +74,24 @@ public class JsonUtils {
         Gson gson = new Gson();
         Type listType = new TypeToken<ArrayList<Type2>>() {}.getType();
         return gson.fromJson(json, listType);
+    }
+
+    // 刪除指定檔案
+    public static void deleteFile(Context context, String fileName) {
+        File file = new File(context.getFilesDir(), fileName);
+        if (file.exists()) {
+            file.delete();
+        }
+    }
+
+    // 刪除所有檔案
+    public static void deleteAllFiles(Context context) {
+        File filesDir = context.getFilesDir();
+        File[] files = filesDir.listFiles();
+        if (files != null) {
+            for (File file : files) {
+                file.delete();
+            }
+        }
     }
 }

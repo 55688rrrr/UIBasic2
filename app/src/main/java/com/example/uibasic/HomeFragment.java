@@ -74,6 +74,12 @@ public class HomeFragment extends Fragment {
 
     private String BiguserId;
 
+    private Integer gifCount = 0;
+    private Integer gifCount1 = 0;
+    private Integer gifCount2 = 0;
+    private Integer gifCount3 = 0;
+    private Integer gifCount4 = 0;
+
     //private Context context;
 
     //private EditText missionDeadlineInput;
@@ -172,7 +178,7 @@ public class HomeFragment extends Fragment {
         }*/
 
         //daily fish
-        int gifCount = dailyList.size();
+        gifCount = dailyList.size();
         System.out.println(gifCount);
 
         // 動態添加GifImageView到RelativeLayout
@@ -192,11 +198,11 @@ public class HomeFragment extends Fragment {
         }
 
         //Eat fish
-        int gifCount1 = eatList.size();
+        gifCount1 = eatList.size();
         System.out.println(gifCount1);
 
         // 動態添加GifImageView到RelativeLayout
-        RelativeLayout relativeLayout1 = view.findViewById(R.id.linearLayout);
+
         for (int i = 0; i < gifCount1; i++) {
             GifImageView gifImageView = new GifImageView(requireContext());
             // 設定GifImageView的圖片、寬度、高度以及隨機位置
@@ -208,19 +214,19 @@ public class HomeFragment extends Fragment {
             params.topMargin =  (int) (Math.random() * 1500); // 隨機Y坐標
             gifImageView.setLayoutParams(params);
             // 將GifImageView添加到RelativeLayout
-            relativeLayout1.addView(gifImageView);
+            relativeLayout.addView(gifImageView);
         }
 
         //Health fish
-        int gifCount2 = healthList.size();
+        gifCount2 = healthList.size();
         System.out.println(gifCount2);
 
         // 動態添加GifImageView到RelativeLayout
-        RelativeLayout relativeLayout2 = view.findViewById(R.id.linearLayout);
+
         for (int i = 0; i < gifCount2; i++) {
             GifImageView gifImageView = new GifImageView(requireContext());
             // 設定GifImageView的圖片、寬度、高度以及隨機位置
-            gifImageView.setImageResource(R.drawable.blue_fish); // 替換為你的Gif圖片資源
+            gifImageView.setImageResource(R.drawable.blue_yellow_fish); // 替換為你的Gif圖片資源
             int width = ViewGroup.LayoutParams.MATCH_PARENT;
             int height = 300;
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, height);
@@ -228,15 +234,15 @@ public class HomeFragment extends Fragment {
             params.topMargin =  (int) (Math.random() * 1500); // 隨機Y坐標
             gifImageView.setLayoutParams(params);
             // 將GifImageView添加到RelativeLayout
-            relativeLayout2.addView(gifImageView);
+            relativeLayout.addView(gifImageView);
         }
 
         //Type1 fish
-        int gifCount3 = type1List.size();
+        gifCount3 = type1List.size();
         System.out.println(gifCount3);
 
         // 動態添加GifImageView到RelativeLayout
-        RelativeLayout relativeLayout3 = view.findViewById(R.id.linearLayout);
+
         for (int i = 0; i < gifCount3; i++) {
             GifImageView gifImageView = new GifImageView(requireContext());
             // 設定GifImageView的圖片、寬度、高度以及隨機位置
@@ -248,15 +254,15 @@ public class HomeFragment extends Fragment {
             params.topMargin =  (int) (Math.random() * 1500); // 隨機Y坐標
             gifImageView.setLayoutParams(params);
             // 將GifImageView添加到RelativeLayout
-            relativeLayout3.addView(gifImageView);
+            relativeLayout.addView(gifImageView);
         }
 
         //Type2 fish
-        int gifCount4 = type2List.size();
+        gifCount4 = type2List.size();
         System.out.println(gifCount4);
 
         // 動態添加GifImageView到RelativeLayout
-        RelativeLayout relativeLayout4 = view.findViewById(R.id.linearLayout);
+
         for (int i = 0; i < gifCount4; i++) {
             GifImageView gifImageView = new GifImageView(requireContext());
             // 設定GifImageView的圖片、寬度、高度以及隨機位置
@@ -268,7 +274,7 @@ public class HomeFragment extends Fragment {
             params.topMargin =  (int) (Math.random() * 1500); // 隨機Y坐標
             gifImageView.setLayoutParams(params);
             // 將GifImageView添加到RelativeLayout
-            relativeLayout4.addView(gifImageView);
+            relativeLayout.addView(gifImageView);
         }
 
 
@@ -452,55 +458,117 @@ public class HomeFragment extends Fragment {
                         // 创建相应的数据对象
                         if ("日常".equals(selectedType) && !isType2Checked) {
                             // 创建 Daily 对象
-                            Daily newDaily = new Daily(BiguserId,dailyList.get(lastIndex_daily).getDaily_id()+1, missionNameText, missionGoalText, 0, dateString);
+                            Daily newDaily = new Daily(BiguserId,dailyList.get(lastIndex_daily).getDaily_id()+"1", missionNameText, missionGoalText, 0, dateString);
 
                             // 将新数据添加到列表
+                            System.out.println(gifCount+"GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
                             dailyList.add(newDaily);
+                            gifCount = dailyList.size();
+                            System.out.println(gifCount+"GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
                             JsonUtils.saveDataToJsonFile(getActivity(), "daily_data.json", dailyList);
+                            GifImageView gifImageView = new GifImageView(requireContext());
+                            // 設定GifImageView的圖片、寬度、高度以及隨機位置
+                            gifImageView.setImageResource(R.drawable.blue_fish); // 替換為你的Gif圖片資源
+                            int width = ViewGroup.LayoutParams.MATCH_PARENT;
+                            int height = 300;
+                            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, height);
+                            params.leftMargin = (int) (Math.random() * 800); // 隨機X坐標
+                            params.topMargin =  (int) (Math.random() * 1500); // 隨機Y坐標
+                            gifImageView.setLayoutParams(params);
+                            // 將GifImageView添加到RelativeLayout
+                            relativeLayout.addView(gifImageView);
 
                         } else if ("飲食".equals(selectedType)) {
                             // 类似地，创建 Eat 对象，并处理 Eat 数据
 
-                            Eat newEat = new Eat(BiguserId,eatList.get(lastIndex_eat).getEat_id()+1, missionNameText, missionGoalText, 0, dateString);
+                            Eat newEat = new Eat(BiguserId,eatList.get(lastIndex_eat).getEat_id()+"1", missionNameText, missionGoalText, 0, dateString);
 
                             // 将新数据添加到列表
                             eatList.add(newEat);
                             JsonUtils.saveDataToJsonFile(getActivity(), "eat_data.json", eatList);
 
+                            GifImageView gifImageView = new GifImageView(requireContext());
+                            // 設定GifImageView的圖片、寬度、高度以及隨機位置
+                            gifImageView.setImageResource(R.drawable.black_white_fish); // 替換為你的Gif圖片資源
+                            int width = ViewGroup.LayoutParams.MATCH_PARENT;
+                            int height = 300;
+                            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, height);
+                            params.leftMargin = (int) (Math.random() * 800); // 隨機X坐標
+                            params.topMargin =  (int) (Math.random() * 1500); // 隨機Y坐標
+                            gifImageView.setLayoutParams(params);
+                            // 將GifImageView添加到RelativeLayout
+                            relativeLayout.addView(gifImageView);
+
                         } else if ("健康".equals(selectedType)) {
                             // 类似地，创建 Health 对象，并处理 Health 数据
 
-                            Health newHealth = new Health(BiguserId,healthList.get(lastIndex_health).getHealth_id()+1, missionNameText, missionGoalText, 0, dateString);
+                            Health newHealth = new Health(BiguserId,healthList.get(lastIndex_health).getHealth_id()+"1", missionNameText, missionGoalText, 0, dateString);
 
                             // 将新数据添加到列表
                             healthList.add(newHealth);
                             JsonUtils.saveDataToJsonFile(getActivity(), "health_data.json", healthList);
 
+                            GifImageView gifImageView = new GifImageView(requireContext());
+                            // 設定GifImageView的圖片、寬度、高度以及隨機位置
+                            gifImageView.setImageResource(R.drawable.blue_yellow_fish); // 替換為你的Gif圖片資源
+                            int width = ViewGroup.LayoutParams.MATCH_PARENT;
+                            int height = 300;
+                            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, height);
+                            params.leftMargin = (int) (Math.random() * 800); // 隨機X坐標
+                            params.topMargin =  (int) (Math.random() * 1500); // 隨機Y坐標
+                            gifImageView.setLayoutParams(params);
+                            // 將GifImageView添加到RelativeLayout
+                            relativeLayout.addView(gifImageView);
+
                         } else if ("其他".equals(selectedType)) {
                             // 类似地，创建 Type2 对象，并处理 Type2 数据
 
-                            Type2 newType2 = new Type2(BiguserId,type2List.get(lastIndex_type2).getType2_id()+1, missionNameText, missionGoalText, 0, dateString);
+                            Type2 newType2 = new Type2(BiguserId,type2List.get(lastIndex_type2).getType2_id()+"1", missionNameText, missionGoalText, 0, dateString);
 
                             // 将新数据添加到列表
                             type2List.add(newType2);
                             JsonUtils.saveDataToJsonFile(getActivity(), "type2_data.json", type2List);
 
+                            GifImageView gifImageView = new GifImageView(requireContext());
+                            // 設定GifImageView的圖片、寬度、高度以及隨機位置
+                            gifImageView.setImageResource(R.drawable.blue_fish); // 替換為你的Gif圖片資源
+                            int width = ViewGroup.LayoutParams.MATCH_PARENT;
+                            int height = 300;
+                            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, height);
+                            params.leftMargin = (int) (Math.random() * 800); // 隨機X坐標
+                            params.topMargin =  (int) (Math.random() * 1500); // 隨機Y坐標
+                            gifImageView.setLayoutParams(params);
+                            // 將GifImageView添加到RelativeLayout
+                            relativeLayout.addView(gifImageView);
+
                         }else {
                             // 类似地，创建 Type2 对象，并处理 Type2 数据
 
-                            Type1 newType1 = new Type1(BiguserId,type1List.get(lastIndex_type1).getType1_id()+1, missionNameText, missionDeadlineText, 0, dateString);
+                            Type1 newType1 = new Type1(BiguserId,type1List.get(lastIndex_type1).getType1_id()+"1", missionNameText, missionDeadlineText, 0, dateString);
 
                             // 将新数据添加到列表
                             type1List.add(newType1);
                             JsonUtils.saveDataToJsonFile(getActivity(), "type1_data.json", type1List);
+
+                            GifImageView gifImageView = new GifImageView(requireContext());
+                            // 設定GifImageView的圖片、寬度、高度以及隨機位置
+                            gifImageView.setImageResource(R.drawable.blue_fish); // 替換為你的Gif圖片資源
+                            int width = ViewGroup.LayoutParams.MATCH_PARENT;
+                            int height = 300;
+                            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, height);
+                            params.leftMargin = (int) (Math.random() * 800); // 隨機X坐標
+                            params.topMargin =  (int) (Math.random() * 1500); // 隨機Y坐標
+                            gifImageView.setLayoutParams(params);
+                            // 將GifImageView添加到RelativeLayout
+                            relativeLayout.addView(gifImageView);
                         }
 
 
                         // 讀取 JSON 檔案中的 daily 資料
-                        String jsonDailyData = JsonUtils.readJsonFromFile(getActivity(),"daily_data.json");
+                        //String jsonDailyData = JsonUtils.readJsonFromFile(getActivity(),"daily_data.json");
                         // 解析 JSON 字串為 ArrayList<Daily> 物件
-                        ArrayList<Daily> dailyList777 = parseJsonToDailyList(jsonDailyData);
-                        System.out.println(dailyList777.get(lastIndex_daily+1).getDaily_name()+"oooooooooooooooo");
+                        //ArrayList<Daily> dailyList777 = parseJsonToDailyList(jsonDailyData);
+                        //System.out.println(dailyList777.get(lastIndex_daily+1).getDaily_name()+"oooooooooooooooo");
                         // 關閉 BottomSheetDialog
                         bottomSheetDialog.dismiss();
                     }

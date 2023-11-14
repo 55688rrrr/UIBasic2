@@ -18,6 +18,7 @@ import pl.droidsonroids.gif.GifDrawable;
 import pl.droidsonroids.gif.GifImageView;
 
 //1009
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.content.Intent;
 //1009 試試看？？
@@ -48,6 +49,15 @@ public class MainActivity3 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
+        ImageButton backHome = findViewById(R.id.BackToHome);
+
+        backHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity3.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //json
         // 讀取 JSON 檔案中的 daily 資料
@@ -122,86 +132,13 @@ public class MainActivity3 extends AppCompatActivity {
         recyclerView1.setAdapter(adapter1);
         System.out.println("reeeeeeeeeeeeeeeeeeeeeee "+ combinedList.get(0));
 
-        // 初始化 RecyclerView 和 Adapter Eat
-        /*RecyclerView recyclerView2 = findViewById(R.id.recycler_view_data_eat);
-        DataEatAdapter adapter2 = new DataEatAdapter(eatList);
-        recyclerView2.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView2.setAdapter(adapter2);
 
-        // 初始化 RecyclerView 和 Adapter Health
-        RecyclerView recyclerView3 = findViewById(R.id.recycler_view_data_health);
-        DataHealthAdapter adapter3 = new DataHealthAdapter(healthList);
-        recyclerView3.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView3.setAdapter(adapter3);
 
-        // 初始化 RecyclerView 和 Adapter Type1
-        RecyclerView recyclerView4 = findViewById(R.id.recycler_view_data_type1);
-        DataType1Adapter adapter4 = new DataType1Adapter(type1List);
-        recyclerView4.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView4.setAdapter(adapter4);
-
-        // 初始化 RecyclerView 和 Adapter Type2
-        RecyclerView recyclerView5 = findViewById(R.id.recycler_view_data_type2);
-        DataType2Adapter adapter5 = new DataType2Adapter(type2List);
-        recyclerView5.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView5.setAdapter(adapter5);*/
-
-//        //1009 試試看？？
-//        lvItems = (ListView) findViewById(R.id.lvItems);
-//        bfList = new ArrayList<GifDrawable>();
-//        bfList_Adapter = new ArrayAdapter<GifDrawable>(this,
-//                android.R.layout.simple_list_item_1, bfList);
-//        lvItems.setAdapter(bfList_Adapter);
 
 
     }
 
-    /*private String readJsonFromFile(String fileName) {
-        String json = "";
-        try (InputStream inputStream = openFileInput(fileName);
-             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-             BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
-            StringBuilder stringBuilder = new StringBuilder();
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                stringBuilder.append(line);
-            }
-            json = stringBuilder.toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return json;
-    }
 
-    private ArrayList<Daily> parseJsonToDailyList(String json) {
-        Gson gson = new Gson();
-        Type listType = new TypeToken<ArrayList<Daily>>() {}.getType();
-        return gson.fromJson(json, listType);
-    }
-
-    private ArrayList<Eat> parseJsonToEatList(String json) {
-        Gson gson = new Gson();
-        Type listType = new TypeToken<ArrayList<Eat>>() {}.getType();
-        return gson.fromJson(json, listType);
-    }
-
-    private ArrayList<Health> parseJsonToHealthList(String json) {
-        Gson gson = new Gson();
-        Type listType = new TypeToken<ArrayList<Health>>() {}.getType();
-        return gson.fromJson(json, listType);
-    }
-
-    private ArrayList<Type1> parseJsonToType1List(String json) {
-        Gson gson = new Gson();
-        Type listType = new TypeToken<ArrayList<Type1>>() {}.getType();
-        return gson.fromJson(json, listType);
-    }
-
-    private ArrayList<Type2> parseJsonToType2List(String json) {
-        Gson gson = new Gson();
-        Type listType = new TypeToken<ArrayList<Type2>>() {}.getType();
-        return gson.fromJson(json, listType);
-    }*/
 }
 
 
