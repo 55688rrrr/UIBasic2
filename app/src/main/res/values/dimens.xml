@@ -1,0 +1,4 @@
+<!-- res/values/dimens.xml -->
+<resources>
+    <dimen name="bottom_sheet_dialog_height">400dp</dimen>
+</resources>

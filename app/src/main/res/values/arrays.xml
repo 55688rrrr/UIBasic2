@@ -1,0 +1,12 @@
+<resources>
+    <!-- 其他資源 -->
+
+    <string-array name="task_types">
+        <item>日常</item>
+        <item>飲食</item>
+        <item>健康</item>
+        <item>其他</item>
+    </string-array>
+
+    <!-- 其他資源 -->
+</resources>

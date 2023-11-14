@@ -39,7 +39,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".login_page" android:exported="true" android:theme="@style/Theme.AppCompat">
+        <activity
+            android:name=".login_page"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
