@@ -198,8 +198,8 @@ public class login_page extends AppCompatActivity {
                 BiguserId=userId;
                 System.out.println("User Nameaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: " + BiguserId);
 
-
-                new OutputDailyTask().execute(userId);
+                User userhere = new User(userId, userName);
+                new SaveUserDataToFileTask().execute(userhere);
 
 
 
@@ -208,6 +208,47 @@ public class login_page extends AppCompatActivity {
                 Toast.makeText(context, "登入失败", Toast.LENGTH_SHORT).show();
                 System.err.println("nono");
             }
+        }
+    }
+
+    //user save
+    private class SaveUserDataToFileTask extends AsyncTask<User, Void, Void> {
+
+
+        @Override
+        protected Void doInBackground(User... params) {
+            // 取得传入的数据
+            if (params.length > 0) {
+                User user = params[0];
+
+                // 将数据转换为 JSON 字符串
+                Gson gson = new Gson();
+                String jsonUser = gson.toJson(user);
+
+                // 将 JSON 字符串存储到文件中
+                saveJsonToFile("user_data.json", jsonUser);
+            }
+
+            return null;
+        }
+
+        private void saveJsonToFile(String fileName, String json) {
+            try (FileOutputStream fileOutputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
+                 OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream)) {
+                // 寫入 JSON 字串到檔案中
+                outputStreamWriter.write(json);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            // 在執行完儲存任務後，你可以在這裡執行任何後續操作，例如切換到下一個畫面
+            System.err.println("成功");
+
+            new OutputDailyTask().execute(BiguserId);
+
         }
     }
 
@@ -257,6 +298,13 @@ public class login_page extends AppCompatActivity {
                         // 设置其他字段
 
                         dailyList.add(daily);
+
+                    }
+                    if (dailyList.isEmpty()) {
+                        // 如果为空，创建默认的 Daily 对象
+                        Daily defaultDaily = new Daily("defaultUserId", "defaultDailyId", "Default Daily", 0, 0, "defaultColor");
+                        // 添加到列表中
+                        dailyList.add(defaultDaily);
                     }
 
 
@@ -285,10 +333,10 @@ public class login_page extends AppCompatActivity {
             if (!dailyList.isEmpty()) {
                 // 日常資料取出成功
                 System.err.println("dd gogo");
-
+                ArrayList<Daily> actualDailyList = new ArrayList<>(dailyList.subList(1, dailyList.size()));
 
                 // 執行 AsyncTask
-                new SaveDataToFileTask().execute(dailyList);
+                new SaveDataToFileTask().execute(actualDailyList);
 
             } else {
                 // 取出失敗
@@ -377,6 +425,13 @@ public class login_page extends AppCompatActivity {
                         // 设置其他字段
 
                         eatList.add(eat);
+
+                    }
+                    if (eatList.isEmpty()) {
+                        // 如果为空，创建默认的 Daily 对象
+                        Eat defaultEat = new Eat("defaultUserId", "defaultDailyId", "Default Daily", 0, 0, "defaultColor");
+                        // 添加到列表中
+                        eatList.add(defaultEat);
                     }
 
 
@@ -406,9 +461,10 @@ public class login_page extends AppCompatActivity {
                 // 日常資料取出成功
                 //Toast.makeText(login_page.this, "登入成功", Toast.LENGTH_SHORT).show();
                 System.err.println("tt gogo");
+                ArrayList<Eat> actualEatList = new ArrayList<>(eatList.subList(1, eatList.size()));
 
                 // 執行 AsyncTask
-                new SaveEatDataToFileTask().execute(eatList);
+                new SaveEatDataToFileTask().execute(actualEatList);
 
 
             } else {
@@ -497,6 +553,13 @@ public class login_page extends AppCompatActivity {
                         // 设置其他字段
 
                         healthList.add(health);
+
+                    }
+                    if (healthList.isEmpty()) {
+                        // 如果为空，创建默认的 Daily 对象
+                        Health defaultHealth = new Health("defaultUserId", "defaultDailyId", "Default Daily", 0, 0, "defaultColor");
+                        // 添加到列表中
+                        healthList.add(defaultHealth);
                     }
 
 
@@ -525,8 +588,9 @@ public class login_page extends AppCompatActivity {
             if (!healthList.isEmpty()) {
                 // 日常資料取出成功
                 System.err.println("pp gogo");
+                ArrayList<Health> actualHealthList = new ArrayList<>(healthList.subList(1, healthList.size()));
 
-                new SaveHealthDataToFileTask().execute(healthList);
+                new SaveHealthDataToFileTask().execute(actualHealthList);
 
 
             } else {
@@ -622,6 +686,13 @@ public class login_page extends AppCompatActivity {
                         // 设置其他字段
 
                         type1List.add(type1);
+
+                    }
+                    if (type1List.isEmpty()) {
+                        // 如果为空，创建默认的 Daily 对象
+                        Type1 defaultType1 = new Type1("defaultUserId", "defaultDailyId", "Default Daily", "2022-11-14", 0, "defaultColor");
+                        // 添加到列表中
+                        type1List.add(defaultType1);
                     }
 
 
@@ -649,9 +720,10 @@ public class login_page extends AppCompatActivity {
         protected void onPostExecute(ArrayList<Type1> type1List) {
             if (!type1List.isEmpty()) {
                 // 日常資料取出成功
+                ArrayList<Type1> actualType1List = new ArrayList<>(type1List.subList(1, type1List.size()));
 
                 // 執行 AsyncTask
-                new SaveType1DataToFileTask().execute(type1List);
+                new SaveType1DataToFileTask().execute(actualType1List);
 
             } else {
                 // 取出失敗
@@ -740,6 +812,13 @@ public class login_page extends AppCompatActivity {
                         // 设置其他字段
 
                         type2List.add(type2);
+
+                    }
+                    if (type2List.isEmpty()) {
+                        // 如果为空，创建默认的 Daily 对象
+                        Type2 defaultType2 = new Type2("defaultUserId", "defaultDailyId", "Default Daily", 0, 0, "defaultColor");
+                        // 添加到列表中
+                        type2List.add(defaultType2);
                     }
 
 
@@ -769,9 +848,10 @@ public class login_page extends AppCompatActivity {
                 // 日常資料取出成功
                 //Toast.makeText(login_page.this, "登入成功", Toast.LENGTH_SHORT).show();
                 System.err.println("22 gogo");
+                ArrayList<Type2> actualType2List = new ArrayList<>(type2List.subList(1, type2List.size()));
 
 
-                for (Type2 type2 : type2List) {
+                for (Type2 type2 : actualType2List) {
                     System.out.println("User ID: " + type2.getUserId());
                     System.out.println("Type2 Id: " + type2.getType2_id());
                     System.out.println("Type2 Name: " + type2.getType2_name());
@@ -780,7 +860,7 @@ public class login_page extends AppCompatActivity {
                     System.out.println("Color: " + type2.getDaily_color());
                     // 打印其他字段
                 }
-                new SaveType2DataToFileTask().execute(type2List);
+                new SaveType2DataToFileTask().execute(actualType2List);
 
 
             } else {

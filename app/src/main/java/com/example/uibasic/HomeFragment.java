@@ -55,6 +55,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -67,6 +68,8 @@ public class HomeFragment extends Fragment {
     private ImageButton addFish;
 
     private ArrayList<Daily> dailyList;
+
+    private ArrayList<User> userList;
 
     private Connection con;
 
@@ -107,16 +110,21 @@ public class HomeFragment extends Fragment {
 
 
         //json
+
+        // 讀取 JSON 檔案中的 user 資料
+        String jsonuserData = JsonUtils.readJsonFromFile(getActivity(),"user_data.json");
+        // 解析 JSON 字串為 ArrayList<Daily> 物件
+        User biguser = JsonUtils.parseJsonToUser(jsonuserData);
+
         // 讀取 JSON 檔案中的 daily 資料
         String jsonDailyData = JsonUtils.readJsonFromFile(getActivity(),"daily_data.json");
         // 解析 JSON 字串為 ArrayList<Daily> 物件
         ArrayList<Daily> dailyList = JsonUtils.parseJsonToDailyList(jsonDailyData);
         int lastIndex_daily = dailyList.size() - 1;
 
-        BiguserId= dailyList.get(0).getUserId();
+        BiguserId= biguser.getUserId();
 
         System.out.println("jsonnnnnnnnnnnnn "+ dailyList.size());
-        System.out.println("jsonnnnnnnnnnnnn "+ dailyList.get(0).getDaily_id());
 
         // 讀取 JSON 檔案中的 eat 資料
         String jsonEatData = JsonUtils.readJsonFromFile(getActivity(),"eat_data.json");
@@ -445,12 +453,25 @@ public class HomeFragment extends Fragment {
                         }
                         String missionDeadlineText = missionDeadlineInput.getText().toString();
                         boolean isType2Checked = type2Check.isChecked();
-                        Date currentDate = new Date();
+
+                        // 获取当前日期
+                        Calendar calendar = Calendar.getInstance();
+                        Date currentDate = calendar.getTime();
+
+                        // 将日期往前一天
+                        calendar.add(Calendar.DAY_OF_MONTH, -1);
+                        Date previousDate = calendar.getTime();
+
                         // 创建 SimpleDateFormat 对象，指定日期格式
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
                         // 将 Date 对象转换为字符串
-                        String dateString = dateFormat.format(currentDate);
+                        //String currentDateStr = dateFormat.format(currentDate);
+                        String previousDateStr = dateFormat.format(previousDate);
+
+
+                        System.out.println("Previous Date: " + previousDateStr);
+
 
                         // 根据 Spinner 选项确定数据类型
                         String selectedType = spinnerTaskType.getSelectedItem().toString();
@@ -458,7 +479,12 @@ public class HomeFragment extends Fragment {
                         // 创建相应的数据对象
                         if ("日常".equals(selectedType) && !isType2Checked) {
                             // 创建 Daily 对象
-                            Daily newDaily = new Daily(BiguserId,dailyList.get(lastIndex_daily).getDaily_id()+"1", missionNameText, missionGoalText, 0, dateString);
+                            Daily newDaily;
+                            if(lastIndex_daily<0){
+                                newDaily = new Daily(BiguserId,BiguserId+"_1", missionNameText, missionGoalText, 0, previousDateStr);
+                            }else {
+                                newDaily = new Daily(BiguserId,dailyList.get(lastIndex_daily).getDaily_id()+"1", missionNameText, missionGoalText, 0, previousDateStr);
+                            }
 
                             // 将新数据添加到列表
                             System.out.println(gifCount+"GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
@@ -481,7 +507,12 @@ public class HomeFragment extends Fragment {
                         } else if ("飲食".equals(selectedType)) {
                             // 类似地，创建 Eat 对象，并处理 Eat 数据
 
-                            Eat newEat = new Eat(BiguserId,eatList.get(lastIndex_eat).getEat_id()+"1", missionNameText, missionGoalText, 0, dateString);
+                            Eat newEat;
+                            if(lastIndex_eat<0){
+                                newEat = new Eat(BiguserId,BiguserId+"_01", missionNameText, missionGoalText, 0, previousDateStr);
+                            }else {
+                                newEat = new Eat(BiguserId,eatList.get(lastIndex_eat).getEat_id()+"1", missionNameText, missionGoalText, 0, previousDateStr);
+                            }
 
                             // 将新数据添加到列表
                             eatList.add(newEat);
@@ -502,7 +533,12 @@ public class HomeFragment extends Fragment {
                         } else if ("健康".equals(selectedType)) {
                             // 类似地，创建 Health 对象，并处理 Health 数据
 
-                            Health newHealth = new Health(BiguserId,healthList.get(lastIndex_health).getHealth_id()+"1", missionNameText, missionGoalText, 0, dateString);
+                            Health newHealth;
+                            if(lastIndex_health<0){
+                                newHealth = new Health(BiguserId,BiguserId+"_001", missionNameText, missionGoalText, 0, previousDateStr);
+                            }else {
+                                newHealth = new Health(BiguserId,healthList.get(lastIndex_health).getHealth_id()+"1", missionNameText, missionGoalText, 0, previousDateStr);
+                            }
 
                             // 将新数据添加到列表
                             healthList.add(newHealth);
@@ -523,7 +559,14 @@ public class HomeFragment extends Fragment {
                         } else if ("其他".equals(selectedType)) {
                             // 类似地，创建 Type2 对象，并处理 Type2 数据
 
-                            Type2 newType2 = new Type2(BiguserId,type2List.get(lastIndex_type2).getType2_id()+"1", missionNameText, missionGoalText, 0, dateString);
+                            Type2 newType2;
+                            if(lastIndex_type2<0){
+                                newType2 = new Type2(BiguserId,BiguserId+"_00001", missionNameText, missionGoalText, 0, previousDateStr);
+
+                            }else {
+                                newType2 = new Type2(BiguserId,type2List.get(lastIndex_type2).getType2_id()+"1", missionNameText, missionGoalText, 0, previousDateStr);
+
+                            }
 
                             // 将新数据添加到列表
                             type2List.add(newType2);
@@ -541,10 +584,36 @@ public class HomeFragment extends Fragment {
                             // 將GifImageView添加到RelativeLayout
                             relativeLayout.addView(gifImageView);
 
-                        }else {
-                            // 类似地，创建 Type2 对象，并处理 Type2 数据
+                        }else if(isType2Checked){
+                            // 类似地，创建 Type1 对象，并处理 Type1 数据
 
-                            Type1 newType1 = new Type1(BiguserId,type1List.get(lastIndex_type1).getType1_id()+"1", missionNameText, missionDeadlineText, 0, dateString);
+                            Type1 newType1;
+                            String formattedDate="";
+                            try {
+                                // 创建两个日期格式，一个用于解析原始日期，另一个用于格式化新日期
+                                SimpleDateFormat inputFormat = new SimpleDateFormat("MM/dd");
+                                SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+                                // 解析原始日期
+                                Date originalDate = inputFormat.parse(missionDeadlineText);
+
+                                // 格式化新日期
+                                formattedDate = outputFormat.format(originalDate);
+
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                                // 处理日期解析异常
+                            }
+                            if(lastIndex_type1<0){
+                                newType1 = new Type1(BiguserId,BiguserId+"_0001", formattedDate, missionDeadlineText, 0, previousDateStr);
+
+                            }else {
+                                newType1 = new Type1(BiguserId,type1List.get(lastIndex_type1).getType1_id()+"1", formattedDate, missionDeadlineText, 0, previousDateStr);
+
+                            }
+
+                            // 打印结果
+                            System.out.println("Save Deadline Date: "+formattedDate); // 输出：2023-11-20
 
                             // 将新数据添加到列表
                             type1List.add(newType1);

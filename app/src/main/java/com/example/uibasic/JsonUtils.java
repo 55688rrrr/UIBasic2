@@ -46,6 +46,11 @@ public class JsonUtils {
         return json;
     }
 
+    public static User parseJsonToUser(String json) {
+        Gson gson = new Gson();
+        return gson.fromJson(json, User.class);
+    }
+
     public static ArrayList<Daily> parseJsonToDailyList(String json) {
         Gson gson = new Gson();
         Type listType = new TypeToken<ArrayList<Daily>>() {}.getType();
