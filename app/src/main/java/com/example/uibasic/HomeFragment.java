@@ -60,7 +60,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class HomeFragment extends Fragment {
 
@@ -99,14 +102,15 @@ public class HomeFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
         // 初始化控制元件
-        //GifImageView blue_fish_0 = view.findViewById(R.id.blue_fish_0);
-        //GifImageView fish_gif = view.findViewById(R.id.fish_gif);
-        //GifImageView fish_gif_2 = view.findViewById(R.id.fish_gif_2);
-        //GifImageView bw_fish = view.findViewById(R.id.bw_fish);
-        //GifImageView bw_fish_2 = view.findViewById(R.id.bw_fish_2);
         GifImageView seaweed_gif = view.findViewById(R.id.seaweed_gif);
         GifImageView barrel_gif = view.findViewById(R.id.barrel_gif);
         GifImageView seaweed_gif_2 = view.findViewById(R.id.seaweed_gif_2);
+
+        ImageButton mdbt = view.findViewById(R.id.imageButton);
+        ImageButton share = view.findViewById(R.id.imageButton2);
+        ImageButton share_back = view.findViewById(R.id.share_back);
+        share_back.setVisibility(View.GONE);
+        ImageButton new_fish = view.findViewById(R.id.imageButton3);
 
 
         //json
@@ -154,6 +158,163 @@ public class HomeFragment extends Fragment {
         int lastIndex_type2 = type2List.size() - 1;
         System.out.println("jsonnnnnnnnnnnnn "+ type2List.size());
 
+        //檢查是否超過七天
+        // 获取今天的日期
+        Calendar calendar = Calendar.getInstance();
+        Date currentDate = calendar.getTime();
+
+        // 将今天的日期转换为字符串，假设日期格式为 "yyyy-MM-dd"
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        //String todayDateString = dateFormat.format(currentDate);
+
+        //daily 檢查
+        Iterator<Daily> dailyIterator = dailyList.iterator();
+        boolean dataChanged = false;
+
+        while (dailyIterator.hasNext()) {
+            Daily daily = dailyIterator.next();
+            String dailyColor = daily.getDaily_color();
+
+            try {
+                Date dailyDate = dateFormat.parse(dailyColor);
+                calendar.setTime(dailyDate);
+
+                // 使用 Calendar 的 add 方法判断日期是否超过七天
+                calendar.add(Calendar.DAY_OF_YEAR, 7);
+                Date sevenDaysLater = calendar.getTime();
+                System.out.println("not nullllllllllllllllllllllllllllll");
+
+                // 如果 dailyDate 在 sevenDaysLater 之前，从列表中移除该项
+                if (sevenDaysLater.before(currentDate)) {
+                    dailyIterator.remove();
+                    dataChanged = true;
+
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+                // 处理日期解析异常
+            }
+        }
+
+        // 遍历 eatList，执行相同的操作
+        Iterator<Eat> eatIterator = eatList.iterator();
+        boolean dataChanged1 = false;
+        while (eatIterator.hasNext()) {
+            Eat eat = eatIterator.next();
+            String eatColor = eat.getEat_color();
+
+            try {
+                Date eatDate = dateFormat.parse(eatColor);
+                calendar.setTime(eatDate);
+
+                // 使用 Calendar 的 add 方法判断日期是否超过七天
+                calendar.add(Calendar.DAY_OF_YEAR, 7);
+                Date sevenDaysLater = calendar.getTime();
+
+                // 如果 eatDate 在 sevenDaysLater 之前，从列表中移除该项
+                if (sevenDaysLater.before(currentDate)) {
+                    eatIterator.remove();
+                    dataChanged1 = true;
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+                // 处理日期解析异常
+            }
+        }
+
+        // 遍历 healthList，执行相同的操作
+        Iterator<Health> healthIterator = healthList.iterator();
+        boolean dataChanged2 = false;
+        while (healthIterator.hasNext()) {
+            Health health = healthIterator.next();
+            String healthColor = health.getHealth_color();
+
+            try {
+                Date healthDate = dateFormat.parse(healthColor);
+                calendar.setTime(healthDate);
+
+                // 使用 Calendar 的 add 方法判断日期是否超过七天
+                calendar.add(Calendar.DAY_OF_YEAR, 7);
+                Date sevenDaysLater = calendar.getTime();
+
+                // 如果 healthDate 在 sevenDaysLater 之前，从列表中移除该项
+                if (sevenDaysLater.before(currentDate)) {
+                    healthIterator.remove();
+                    dataChanged2 = true;
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+                // 处理日期解析异常
+            }
+        }
+
+        // 遍历 type1List，检查每一项的 type1_deadline 是否在今天日期之前
+        Iterator<Type1> type1Iterator = type1List.iterator();
+        boolean dataChanged3 = false;
+        while (type1Iterator.hasNext()) {
+            Type1 type1 = type1Iterator.next();
+            String type1Deadline = type1.getType1_deadline();
+
+            try {
+                Date deadlineDate = dateFormat.parse(type1Deadline);
+
+                // 如果 deadlineDate 在今天日期之前，从列表中移除该项
+                if (deadlineDate.before(currentDate)) {
+                    type1Iterator.remove();
+                    dataChanged3 = true;
+                    System.out.println("has been deleted!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                    System.out.println(currentDate);
+                    System.out.println(deadlineDate);
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+                // 处理日期解析异常
+            }
+        }
+
+        // 遍历 type2List，执行相同的操作
+        Iterator<Type2> type2Iterator = type2List.iterator();
+        boolean dataChanged4 = false;
+        while (type2Iterator.hasNext()) {
+            Type2 type2 = type2Iterator.next();
+            String type2Color = type2.getDaily_color();
+
+            try {
+                Date type2Date = dateFormat.parse(type2Color);
+                calendar.setTime(type2Date);
+
+                // 使用 Calendar 的 add 方法判断日期是否超过七天
+                calendar.add(Calendar.DAY_OF_YEAR, 7);
+                Date sevenDaysLater = calendar.getTime();
+
+                // 如果 type2Date 在 sevenDaysLater 之前，从列表中移除该项
+                if (sevenDaysLater.before(currentDate)) {
+                    type2Iterator.remove();
+                    dataChanged4 = true;
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+                // 处理日期解析异常
+            }
+        }
+
+        // 保存 每個List 到 JSON 文件
+        if (dataChanged) {
+            JsonUtils.saveDataToJsonFile(getActivity(), "daily_data.json", dailyList);
+        }
+        if (dataChanged1) {
+            JsonUtils.saveDataToJsonFile(getActivity(), "eat_data.json", eatList);
+        }
+        if (dataChanged2) {
+            JsonUtils.saveDataToJsonFile(getActivity(), "health_data.json", healthList);
+        }
+        if (dataChanged3) {
+            JsonUtils.saveDataToJsonFile(getActivity(), "type1_data.json", type1List);
+        }
+        if (dataChanged4) {
+            JsonUtils.saveDataToJsonFile(getActivity(), "type2_data.json", type2List);
+        }
+
 
         /*this.container = view.findViewById(R.id.container);
 
@@ -193,10 +354,32 @@ public class HomeFragment extends Fragment {
         RelativeLayout relativeLayout = view.findViewById(R.id.linearLayout);
         for (int i = 0; i < gifCount; i++) {
             GifImageView gifImageView = new GifImageView(requireContext());
+
+            // 取得該位置的 Daily
+            Daily daily = dailyList.get(i);
+            // 根据比例计算鱼的大小
+            int dailyDone = daily.getDaily_done();
+            int dailyGoal = daily.getDaily_goal();
+            double progressRatio = (double) dailyDone / dailyGoal;
+
+            // 計算魚的大小
+            int baseSize = 2000;
+            int width, height;
+
+            // 根據 progressRatio 範圍設定魚的大小
+            if (progressRatio < 1.0 / 3) {
+                width = (int) (baseSize * 1.0 / 3);
+                height = (int) (baseSize * 1.0 / 3);
+            } else if (progressRatio < 2.0 / 3) {
+                width = (int) (baseSize * 2.0 / 3);
+                height = (int) (baseSize * 2.0 / 3);
+            } else {
+                width = baseSize;
+                height = baseSize;
+            }
+
             // 設定GifImageView的圖片、寬度、高度以及隨機位置
             gifImageView.setImageResource(R.drawable.blue_fish); // 替換為你的Gif圖片資源
-            int width = ViewGroup.LayoutParams.MATCH_PARENT;
-            int height = 300;
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, height);
             params.leftMargin = (int) (Math.random() * 800); // 隨機X坐標
             params.topMargin =  (int) (Math.random() * 1500); // 隨機Y坐標
@@ -213,10 +396,33 @@ public class HomeFragment extends Fragment {
 
         for (int i = 0; i < gifCount1; i++) {
             GifImageView gifImageView = new GifImageView(requireContext());
+
+            // 取得該位置的 Eat
+            Eat eat = eatList.get(i);
+            // 根据比例计算鱼的大小
+            int eatDone = eat.getEat_done();
+            int eatGoal = eat.getEat_goal();
+            double progressRatio = (double) eatDone / eatGoal;
+
+            // 計算魚的大小
+            int baseSize = 40000;
+            int width, height;
+
+            // 根據 progressRatio 範圍設定魚的大小
+            if (progressRatio < 1.0 / 3) {
+                width = (int) (baseSize * 1.0 / 3);
+                height = (int) (baseSize * 1.0 / 3);
+            } else if (progressRatio < 2.0 / 3) {
+                width = (int) (baseSize * 2.0 / 3);
+                height = (int) (baseSize * 2.0 / 3);
+            } else {
+                width = baseSize;
+                height = baseSize;
+            }
+
             // 設定GifImageView的圖片、寬度、高度以及隨機位置
             gifImageView.setImageResource(R.drawable.black_white_fish); // 替換為你的Gif圖片資源
-            int width = ViewGroup.LayoutParams.MATCH_PARENT;
-            int height = 300;
+            //int width = ViewGroup.LayoutParams.MATCH_PARENT;
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, height);
             params.leftMargin = (int) (Math.random() * 800); // 隨機X坐標
             params.topMargin =  (int) (Math.random() * 1500); // 隨機Y坐標
@@ -233,10 +439,32 @@ public class HomeFragment extends Fragment {
 
         for (int i = 0; i < gifCount2; i++) {
             GifImageView gifImageView = new GifImageView(requireContext());
+
+            // 取得該位置的 Health
+            Health health = healthList.get(i);
+            // 根据比例计算鱼的大小
+            int healthDone = health.getHealth_done();
+            int healthGoal = health.getHealth_goal();
+            double progressRatio = (double) healthDone / healthGoal;
+
+            // 計算魚的大小
+            int baseSize = 2000;
+            int width, height;
+
+            // 根據 progressRatio 範圍設定魚的大小
+            if (progressRatio < 1.0 / 3) {
+                width = (int) (baseSize * 1.0 / 3);
+                height = (int) (baseSize * 1.0 / 3);
+            } else if (progressRatio < 2.0 / 3) {
+                width = (int) (baseSize * 2.0 / 3);
+                height = (int) (baseSize * 2.0 / 3);
+            } else {
+                width = baseSize;
+                height = baseSize;
+            }
+
             // 設定GifImageView的圖片、寬度、高度以及隨機位置
             gifImageView.setImageResource(R.drawable.blue_yellow_fish); // 替換為你的Gif圖片資源
-            int width = ViewGroup.LayoutParams.MATCH_PARENT;
-            int height = 300;
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, height);
             params.leftMargin = (int) (Math.random() * 800); // 隨機X坐標
             params.topMargin =  (int) (Math.random() * 1500); // 隨機Y坐標
@@ -253,10 +481,27 @@ public class HomeFragment extends Fragment {
 
         for (int i = 0; i < gifCount3; i++) {
             GifImageView gifImageView = new GifImageView(requireContext());
+
+            // 取得該位置的 Type1
+            Type1 type1 = type1List.get(i);
+            // 根据比例计算鱼的大小
+            int type1Done = type1.getType1_done();
+
+            // 計算魚的大小
+            int baseSize = 2000;
+            int width, height;
+
+            // 根據 progressRatio 範圍設定魚的大小
+            if (type1Done <1) {
+                width = (int) (baseSize * 1.0 / 2);
+                height = (int) (baseSize * 1.0 / 2);
+            } else {
+                width = baseSize;
+                height = baseSize;
+            }
+
             // 設定GifImageView的圖片、寬度、高度以及隨機位置
             gifImageView.setImageResource(R.drawable.blue_fish); // 替換為你的Gif圖片資源
-            int width = ViewGroup.LayoutParams.MATCH_PARENT;
-            int height = 300;
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, height);
             params.leftMargin = (int) (Math.random() * 800); // 隨機X坐標
             params.topMargin =  (int) (Math.random() * 1500); // 隨機Y坐標
@@ -273,10 +518,32 @@ public class HomeFragment extends Fragment {
 
         for (int i = 0; i < gifCount4; i++) {
             GifImageView gifImageView = new GifImageView(requireContext());
+
+            // 取得該位置的 Type2
+            Type2 type2 = type2List.get(i);
+            // 根据比例计算鱼的大小
+            int type2Done = type2.getType2_done();
+            int type2Goal = type2.getType2_goal();
+            double progressRatio = (double) type2Done / type2Goal;
+
+            // 計算魚的大小
+            int baseSize = 2000;
+            int width, height;
+
+            // 根據 progressRatio 範圍設定魚的大小
+            if (progressRatio < 1.0 / 3) {
+                width = (int) (baseSize * 1.0 / 3);
+                height = (int) (baseSize * 1.0 / 3);
+            } else if (progressRatio < 2.0 / 3) {
+                width = (int) (baseSize * 2.0 / 3);
+                height = (int) (baseSize * 2.0 / 3);
+            } else {
+                width = baseSize;
+                height = baseSize;
+            }
+
             // 設定GifImageView的圖片、寬度、高度以及隨機位置
             gifImageView.setImageResource(R.drawable.blue_fish); // 替換為你的Gif圖片資源
-            int width = ViewGroup.LayoutParams.MATCH_PARENT;
-            int height = 300;
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, height);
             params.leftMargin = (int) (Math.random() * 800); // 隨機X坐標
             params.topMargin =  (int) (Math.random() * 1500); // 隨機Y坐標
@@ -304,7 +571,7 @@ public class HomeFragment extends Fragment {
         });*/
 
         //feed
-        ImageButton mdbt = view.findViewById(R.id.imageButton);
+
         mdbt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -317,12 +584,27 @@ public class HomeFragment extends Fragment {
 
 
         //share
-        ImageButton rtbt = view.findViewById(R.id.imageButton2);
-        rtbt.setOnClickListener(new View.OnClickListener() {
+
+        share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent intent = new Intent(getActivity(), MainActivity3.class);
-                startActivity(intent);*/
+
+                mdbt.setVisibility(View.GONE);
+                share.setVisibility(View.GONE);
+                new_fish.setVisibility(View.GONE);
+                share_back.setVisibility(View.VISIBLE);
+            }
+        });
+
+        //share_back
+
+        share_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mdbt.setVisibility(View.VISIBLE);
+                share.setVisibility(View.VISIBLE);
+                new_fish.setVisibility(View.VISIBLE);
+                share_back.setVisibility(View.GONE);
             }
         });
 
@@ -330,7 +612,7 @@ public class HomeFragment extends Fragment {
 
 
         //new fish
-        ImageButton new_fish = view.findViewById(R.id.imageButton3);
+
         new_fish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -452,6 +734,9 @@ public class HomeFragment extends Fragment {
                             // 处理字符串为空的情况
                         }
                         String missionDeadlineText = missionDeadlineInput.getText().toString();
+                        Pattern pattern = Pattern.compile("\\d{4}/\\d{2}/\\d{2}");
+                        Matcher matcher = pattern.matcher(missionDeadlineText);
+
                         boolean isType2Checked = type2Check.isChecked();
 
                         // 获取当前日期
@@ -480,7 +765,7 @@ public class HomeFragment extends Fragment {
                         if ("日常".equals(selectedType)) {
                             // 创建 Daily 对象
                             Daily newDaily;
-                            if(lastIndex_daily<0){
+                            if(dailyList.isEmpty()){
                                 newDaily = new Daily(BiguserId,BiguserId+"_1", missionNameText, missionGoalText, 0, previousDateStr);
                             }else {
                                 newDaily = new Daily(BiguserId,dailyList.get(lastIndex_daily).getDaily_id()+"1", missionNameText, missionGoalText, 0, previousDateStr);
@@ -492,11 +777,14 @@ public class HomeFragment extends Fragment {
                             gifCount = dailyList.size();
                             System.out.println(gifCount+"GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
                             JsonUtils.saveDataToJsonFile(getActivity(), "daily_data.json", dailyList);
+
+                            //new fish
                             GifImageView gifImageView = new GifImageView(requireContext());
                             // 設定GifImageView的圖片、寬度、高度以及隨機位置
                             gifImageView.setImageResource(R.drawable.blue_fish); // 替換為你的Gif圖片資源
-                            int width = ViewGroup.LayoutParams.MATCH_PARENT;
-                            int height = 300;
+                            //int width = ViewGroup.LayoutParams.MATCH_PARENT;
+                            int width = (int) (2000 * 1.0 / 3);
+                            int height = (int) (2000 * 1.0 / 3);
                             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, height);
                             params.leftMargin = (int) (Math.random() * 800); // 隨機X坐標
                             params.topMargin =  (int) (Math.random() * 1500); // 隨機Y坐標
@@ -508,7 +796,7 @@ public class HomeFragment extends Fragment {
                             // 类似地，创建 Eat 对象，并处理 Eat 数据
 
                             Eat newEat;
-                            if(lastIndex_eat<0){
+                            if(eatList.isEmpty()){
                                 newEat = new Eat(BiguserId,BiguserId+"_01", missionNameText, missionGoalText, 0, previousDateStr);
                             }else {
                                 newEat = new Eat(BiguserId,eatList.get(lastIndex_eat).getEat_id()+"1", missionNameText, missionGoalText, 0, previousDateStr);
@@ -521,8 +809,9 @@ public class HomeFragment extends Fragment {
                             GifImageView gifImageView = new GifImageView(requireContext());
                             // 設定GifImageView的圖片、寬度、高度以及隨機位置
                             gifImageView.setImageResource(R.drawable.black_white_fish); // 替換為你的Gif圖片資源
-                            int width = ViewGroup.LayoutParams.MATCH_PARENT;
-                            int height = 300;
+                            //int width = ViewGroup.LayoutParams.MATCH_PARENT;
+                            int width = (int) (40000 * 1.0 / 3);
+                            int height = (int) (40000 * 1.0 / 3);
                             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, height);
                             params.leftMargin = (int) (Math.random() * 800); // 隨機X坐標
                             params.topMargin =  (int) (Math.random() * 1500); // 隨機Y坐標
@@ -534,7 +823,7 @@ public class HomeFragment extends Fragment {
                             // 类似地，创建 Health 对象，并处理 Health 数据
 
                             Health newHealth;
-                            if(lastIndex_health<0){
+                            if(healthList.isEmpty()){
                                 newHealth = new Health(BiguserId,BiguserId+"_001", missionNameText, missionGoalText, 0, previousDateStr);
                             }else {
                                 newHealth = new Health(BiguserId,healthList.get(lastIndex_health).getHealth_id()+"1", missionNameText, missionGoalText, 0, previousDateStr);
@@ -547,8 +836,8 @@ public class HomeFragment extends Fragment {
                             GifImageView gifImageView = new GifImageView(requireContext());
                             // 設定GifImageView的圖片、寬度、高度以及隨機位置
                             gifImageView.setImageResource(R.drawable.blue_yellow_fish); // 替換為你的Gif圖片資源
-                            int width = ViewGroup.LayoutParams.MATCH_PARENT;
-                            int height = 300;
+                            int width = (int) (2000 * 1.0 / 3);
+                            int height = (int) (2000 * 1.0 / 3);
                             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, height);
                             params.leftMargin = (int) (Math.random() * 800); // 隨機X坐標
                             params.topMargin =  (int) (Math.random() * 1500); // 隨機Y坐標
@@ -560,7 +849,7 @@ public class HomeFragment extends Fragment {
                             // 类似地，创建 Type2 对象，并处理 Type2 数据
 
                             Type2 newType2;
-                            if(lastIndex_type2<0){
+                            if(type2List.isEmpty()){
                                 newType2 = new Type2(BiguserId,BiguserId+"_00001", missionNameText, missionGoalText, 0, previousDateStr);
 
                             }else {
@@ -575,8 +864,8 @@ public class HomeFragment extends Fragment {
                             GifImageView gifImageView = new GifImageView(requireContext());
                             // 設定GifImageView的圖片、寬度、高度以及隨機位置
                             gifImageView.setImageResource(R.drawable.blue_fish); // 替換為你的Gif圖片資源
-                            int width = ViewGroup.LayoutParams.MATCH_PARENT;
-                            int height = 300;
+                            int width = (int) (2000 * 1.0 / 3);
+                            int height = (int) (2000 * 1.0 / 3);
                             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, height);
                             params.leftMargin = (int) (Math.random() * 800); // 隨機X坐標
                             params.topMargin =  (int) (Math.random() * 1500); // 隨機Y坐標
@@ -586,6 +875,8 @@ public class HomeFragment extends Fragment {
 
                         }else if(isType2Checked){
                             // 类似地，创建 Type1 对象，并处理 Type1 数据
+
+
 
                             Type1 newType1;
                             String formattedDate1="";
@@ -612,7 +903,7 @@ public class HomeFragment extends Fragment {
                                 e.printStackTrace();
                                 // 处理日期解析异常
                             }
-                            if(lastIndex_type1<0){
+                            if(type1List.isEmpty()){
                                 newType1 = new Type1(BiguserId,BiguserId+"_0001", missionNameText, formattedDate1, 0, previousDateStr);
 
                             }else {
@@ -631,8 +922,8 @@ public class HomeFragment extends Fragment {
                             GifImageView gifImageView = new GifImageView(requireContext());
                             // 設定GifImageView的圖片、寬度、高度以及隨機位置
                             gifImageView.setImageResource(R.drawable.blue_fish); // 替換為你的Gif圖片資源
-                            int width = ViewGroup.LayoutParams.MATCH_PARENT;
-                            int height = 300;
+                            int width = (int) (2000 * 1.0 / 2);
+                            int height = (int) (2000 * 1.0 / 2);
                             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, height);
                             params.leftMargin = (int) (Math.random() * 800); // 隨機X坐標
                             params.topMargin =  (int) (Math.random() * 1500); // 隨機Y坐標

@@ -130,7 +130,7 @@ public class MainActivity3 extends AppCompatActivity {
         DataDailyAdapter adapter1 = new DataDailyAdapter(this,combinedList, dailyList, eatList, healthList, type1List, type2List);
         recyclerView1.setLayoutManager(new LinearLayoutManager(this));
         recyclerView1.setAdapter(adapter1);
-        System.out.println("reeeeeeeeeeeeeeeeeeeeeee "+ combinedList.get(0));
+
 
 
 
