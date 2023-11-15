@@ -477,7 +477,7 @@ public class HomeFragment extends Fragment {
                         String selectedType = spinnerTaskType.getSelectedItem().toString();
 
                         // 创建相应的数据对象
-                        if ("日常".equals(selectedType) && !isType2Checked) {
+                        if ("日常".equals(selectedType)) {
                             // 创建 Daily 对象
                             Daily newDaily;
                             if(lastIndex_daily<0){
@@ -556,7 +556,7 @@ public class HomeFragment extends Fragment {
                             // 將GifImageView添加到RelativeLayout
                             relativeLayout.addView(gifImageView);
 
-                        } else if ("其他".equals(selectedType)) {
+                        } else if ("其他".equals(selectedType) && !isType2Checked) {
                             // 类似地，创建 Type2 对象，并处理 Type2 数据
 
                             Type2 newType2;
@@ -588,32 +588,41 @@ public class HomeFragment extends Fragment {
                             // 类似地，创建 Type1 对象，并处理 Type1 数据
 
                             Type1 newType1;
-                            String formattedDate="";
+                            String formattedDate1="";
                             try {
                                 // 创建两个日期格式，一个用于解析原始日期，另一个用于格式化新日期
                                 SimpleDateFormat inputFormat = new SimpleDateFormat("MM/dd");
                                 SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
 
+                                // 获取当前日期的年份
+                                Calendar calendar1 = Calendar.getInstance();
+                                int currentYear = calendar1.get(Calendar.YEAR);
+
                                 // 解析原始日期
                                 Date originalDate = inputFormat.parse(missionDeadlineText);
+                                calendar1.setTime(originalDate);
+                                calendar1.set(Calendar.YEAR, currentYear);
+
 
                                 // 格式化新日期
-                                formattedDate = outputFormat.format(originalDate);
+                                String formattedDate = outputFormat.format(calendar1.getTime());
+                                formattedDate1=formattedDate;
 
                             } catch (ParseException e) {
                                 e.printStackTrace();
                                 // 处理日期解析异常
                             }
                             if(lastIndex_type1<0){
-                                newType1 = new Type1(BiguserId,BiguserId+"_0001", formattedDate, missionDeadlineText, 0, previousDateStr);
+                                newType1 = new Type1(BiguserId,BiguserId+"_0001", missionNameText, formattedDate1, 0, previousDateStr);
 
                             }else {
-                                newType1 = new Type1(BiguserId,type1List.get(lastIndex_type1).getType1_id()+"1", formattedDate, missionDeadlineText, 0, previousDateStr);
+                                newType1 = new Type1(BiguserId,type1List.get(lastIndex_type1).getType1_id()+"1", missionNameText, formattedDate1, 0, previousDateStr);
 
                             }
 
                             // 打印结果
-                            System.out.println("Save Deadline Date: "+formattedDate); // 输出：2023-11-20
+                            System.out.println("Save Deadline Date: "+newType1.getType1_deadline());
+                            System.out.println("Save Deadline Date: hiiiiiiiiiiiiiiiiiiiiii");// 输出：2023-11-20
 
                             // 将新数据添加到列表
                             type1List.add(newType1);

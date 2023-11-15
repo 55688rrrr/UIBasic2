@@ -385,7 +385,7 @@ public class DataDailyAdapter extends RecyclerView.Adapter<DataDailyAdapter.View
         // 取得 Type1 的 color 字符串
         try {
             // 取得 Health 的 color 字符串
-            String type1Color = type1.getType1_color();
+            //String type1Color = type1.getType1_color();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date todayDate = dateFormat.parse(todayDateString);
             Date deadlineDate = dateFormat.parse(type1.getType1_deadline());
@@ -394,7 +394,7 @@ public class DataDailyAdapter extends RecyclerView.Adapter<DataDailyAdapter.View
             System.out.println(deadlineDate);
 
             // 检查 type1Date 是否在 todayDateString 之前
-            if (todayDate.before(deadlineDate) && type1.getType1_done() < 2) {
+            if (todayDate.before(deadlineDate) && type1.getType1_done() < 1) {
                 return true;
             } else {
                 return false;
@@ -402,6 +402,7 @@ public class DataDailyAdapter extends RecyclerView.Adapter<DataDailyAdapter.View
         } catch (ParseException e) {
             e.printStackTrace();
             // 解析日期出错，你可以根据实际情况处理，这里返回 false
+            System.out.println("Date Wrongggggggggggggggggggggggg");
             return false;
         }
     }
