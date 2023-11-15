@@ -55,7 +55,7 @@
         android:ems="10"
         android:inputType="text"
         android:text=""
-        android:textSize="18sp" />
+        android:textSize="20sp" />
 
     <!-- 登入按鈕 -->
     <Button
