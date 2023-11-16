@@ -34,7 +34,8 @@
             android:theme="@style/Theme.AppCompat"/>
         <activity
             android:name=".EventEditActivity"
-            android:exported="true"/>
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
         <activity
             android:name=".register_page"
             android:exported="true"
