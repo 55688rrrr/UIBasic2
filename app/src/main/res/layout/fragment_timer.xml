@@ -4,15 +4,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TimerFragment">
+    tools:context=".TimerFragment"
+    android:background="@color/mainBlue">
 
-    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:id="@+id/progress_layout"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:layout_margin="20dp">
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/circular_shape"
+            android:indeterminate="false"
+            android:progressDrawable="@drawable/circular_progress_bar"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/progress_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="--:--"
+            android:textColor="@color/iconBlue"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+
+
+    </RelativeLayout>
+
     <TextView
+        android:id="@+id/timerStatusText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Timer Fragment"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"
-        android:textColor="@color/lavender"/>
+        android:layout_below="@id/progress_layout"
+        android:layout_centerHorizontal="true"
+        android:text="閒置中"
+        android:textColor="@color/iconBlue"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/repetitionEditText"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:hint="輸入重複次數(最少為1)"
+        android:layout_marginTop="500dp"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:inputType="number"
+        android:background="@drawable/boarder"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/startButton"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="600dp"
+        android:background="@color/itemBlue"
+        android:text="開始計時"
+        android:textSize="18sp"/>
 
 </RelativeLayout>
