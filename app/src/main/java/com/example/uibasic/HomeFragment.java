@@ -873,17 +873,17 @@ public class HomeFragment extends Fragment {
                             lastIndextype2++;
 
                             GifImageView gifImageView = new GifImageView(requireContext());
-                            // 設定GifImageView的圖片、寬度、高度以及隨機位置
-                            gifImageView.setImageResource(R.drawable.orange_fish); // 替換為你的Gif圖片資源
+                            // Set GifImageView's image resource, width, height, and random position
+                            gifImageView.setImageResource(R.drawable.orange_fish);
+
                             int width = (int) (4000 * 1.0 / 3);
                             int height = (int) (4000 * 1.0 / 3);
-                            //int width = 40000;
-                            //int height = 40000;
+
                             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, height);
-                            params.leftMargin = (int) (Math.random() * 800); // 隨機X坐標
-                            params.topMargin =  (int) (Math.random() * 1500); // 隨機Y坐標
+                            params.leftMargin = (int) (Math.random() * 800 ); // Random X coordinate
+                            params.topMargin = (int) (Math.random() * 1500 ); // Random Y coordinate
+
                             gifImageView.setLayoutParams(params);
-                            // 將GifImageView添加到RelativeLayout
                             relativeLayout.addView(gifImageView);
 
                         }else if(isType2Checked){
